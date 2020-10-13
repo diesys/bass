@@ -2,8 +2,10 @@
     --theme-color: #3a9;
     --light-color: #eee;
     --dark-color: #111;
-    --light-color-semialpha: #eeee;
-    --dark-color-semialpha: #111e;
+    --light-color-bitalpha: #eeee;
+    --dark-color-bitalpha: #111e;
+    --light-color-semialpha: #eee8;
+    --dark-color-semialpha: #1118;
     --light-txt-shadow: 1px 1px 4px #fff8;
     --dark-txt-shadow: 1px 2px 5px #000c;
     
@@ -113,7 +115,7 @@ header.tilt-gradient::after {
 .dark header.tilt-gradient::after {filter: brightness(1.05);}
 .light header.tilt-gradient::after {filter: brightness(.95);}
 header h1 {
-    background: linear-gradient(var(--dark-color-semialpha), transparent);
+    background: linear-gradient(var(--dark-color-bitalpha), transparent);
     margin: 0;
     padding: 2em 0 1em 0;
     flex: 1;
@@ -205,12 +207,12 @@ header h1 {
     z-index: 3;
 }
 .dark #player {
-    background: linear-gradient(transparent, var(--dark-color-semialpha));
+    background: linear-gradient(transparent, var(--dark-color-bitalpha));
     color: var(--light-color);
     text-shadow: var(--dark-txt-shadow) !important;
 }
 .light #player {
-    background: linear-gradient(transparent, var(--light-color-semialpha));
+    background: linear-gradient(transparent, var(--light-color-bitalpha));
     color: var(--dark-color);
     text-shadow: var(--light-txt-shadow) !important;
 }
@@ -227,11 +229,21 @@ header h1 {
 }
 
 @media screen and (max-width: 500px) {
+    #tracklist {
+        box-shadow: var(--dark-txt-shadow);
+        padding: 0;
+        margin: 2em;
+        border-radius: 1em;
+        overflow-y: hidden;
+        /* background: var(--dark-btn); */
+        background-color: var(--dark-color-semialpha);
+    }
     .track {
         padding: 1rem;
         padding-left: 0;
-        margin: 0;
+        margin: 0 0 0 1.6em;
         border-radius: 0;
+        background-color: var(--dark-color-semialpha);
     }
     header::after {
         padding-bottom: 0;
