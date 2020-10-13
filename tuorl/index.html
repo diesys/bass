@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
     <!-- meta-info -->
+    <title>Tuorl @ LukeMusic</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tuorl BASS Album experiment by Luke">
     <meta name="keywords" content="bass,music,album,jazz,prog,rock,midi,opensource">
     
-    <title>Tuorl @ LukeMusic</title>
-
     <!-- custom open font -->
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/trueno" type="text/css" />
 
     <!-- custom style by flowin.space -->
     <link rel="stylesheet" href="../assets/style.min.css" type="text/css" />
+    
+    <!-- CUSTOMIZATIONS -->
     <style>
         :root {
             --theme-color: #3a9;
-            --theme-color2: #fc1;
             --cover-img: url("https://images.unsplash.com/photo-1445985543470-41fba5c3144a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=50");
         }
     </style>
@@ -29,8 +29,9 @@
         <p>Experimental BASS album</p>
     </header>
 
-    <div class="main-content flex">
-        <ol class="tracklist" start="0">
+    <!-- creare dinamicamente con JS? cosi basta scrivere titolo e percorso file in un json inline? -->
+    <section class="main-content flex">
+        <ol id="tracklist" start="0">
             <li class="track" data-audiosrc="00_(intro)_Stadtpark.mp3">
                 Stadtpark (intro)</li>
             <li class="track" data-audiosrc="01_Phoenix.mp3">
@@ -47,7 +48,7 @@
                 Gasta Cojim</li>
         </ol>
 
-        <section class="details">
+        <div id="details">
             <p><b>Tuorl</b> is (sort of) a BASS album (or maybe BASS-Jazz-Funky-(prog)Rock-??...).
                 All instruments are MIDI except BASS of course (and some small parts on violin, flute and guitar...
                 CH played el. guitar, thanks!! :):) ) </p>
@@ -58,13 +59,34 @@
             <p>Plz give feedback, suggestions and critique 
                 (bassically, the stuff that helps people improve)</p>
             <p>Ok ciao, thanks! Yo!</p>
-        </section>
-    </div>
+        </div>
+    </section>
     
     <footer id="player" class="flex center space-evenly">
         <span id="now_playing">Choose track</span>
-        <audio src="" controls></audio>
+        <audio src="#" controls></audio>
     </footer>
 
+    <script>
+        // Pure JS simple click and play player UI
+        function playTrack(entry) {
+            document.querySelectorAll('.track').forEach(element => {
+                element.classList.remove('active');
+            }); entry.classList.add('active')
+
+            var player = document.querySelector('#player>audio');
+            var playing = document.querySelector('#player>#now_playing');
+
+            player.setAttribute('src', entry.getAttribute('data-audiosrc'))
+            player.play()
+            playing.innerHTML = entry.innerHTML
+        }
+
+        document.querySelectorAll('.track').forEach(element => {
+            element.addEventListener('click', function() {
+                playTrack(element)
+            })
+        })
+    </script>
 </body>
 </html>

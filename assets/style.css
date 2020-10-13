@@ -43,12 +43,6 @@ body.light {color: var(--dark-dark);}
 .dark .main-content {background: linear-gradient(var(--theme-color), var(--dark-color));}
 .light .main-content {background: linear-gradient(var(--theme-color), var(--light-color));}
 
-.main-content > .tracklist,
-.main-content > .details {
-    flex: 1;
-    min-width: 450px;
-}
-
 /* HEADER */
 header {
     width: 100vw;
@@ -75,8 +69,18 @@ header h1 {
     width: 100%;
 }
 
+/* MAIN CONTENT */
+.main-content>#tracklist,
+.main-content>#details {
+    flex: 1;
+    min-width: 350px;
+}
+.main-content>#details {
+    padding: 2em 3em .5em 3em;
+}
+
 /* TRACKLIST */
-.tracklist {
+#tracklist {
     margin: 1em;
     padding: 1em;
     list-style: decimal-leading-zero;
@@ -130,6 +134,7 @@ header h1 {
     min-height: 3em;
     padding: .5rem 1em;
     margin: 0;
+    flex-wrap: wrap-reverse !important;
 }
 .dark #player {
     background: linear-gradient(transparent, var(--dark-color-semialpha));
