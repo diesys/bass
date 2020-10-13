@@ -32,7 +32,7 @@ body {
     margin: 0;
     width: 100vw;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     font-family: 'TruenoRegular', sans-serif;
     background: var(--theme-color);
 }
@@ -84,19 +84,18 @@ header {
     text-align: center;
     overflow: hidden !important;
     z-index: 0;
+    position: relative;
+    top: -1px;
 }
-
 header::after {
     content: '';
     width: 100%;
     height: 5em;
     background: linear-gradient(transparent, var(--theme-color));
 }
-
 header * {
     z-index: 1;
 }
-
 header.tilt-gradient {
     padding-bottom: 3em;
 }
@@ -111,8 +110,6 @@ header.tilt-gradient::after {
 }
 .dark header.tilt-gradient::after {filter: brightness(1.05);}
 .light header.tilt-gradient::after {filter: brightness(.95);}
-
-
 header h1 {
     background: linear-gradient(var(--dark-color-semialpha), transparent);
     margin: 0;
@@ -122,14 +119,14 @@ header h1 {
 }
 #theme_toggle {
     position: absolute;
-    top: 5em;
-    right: 1em;
+    top: .6em;
+    right: .4em;
     margin: 1em;
     background-image: url('sunmoon.png');
     background-repeat: no-repeat;
     background-size: contain;
-    width: 4em;
-    height: 4em;
+    width: 3.2em;
+    height: 3.2em;
     border-radius: 1em;
     z-index: 2;
 }
@@ -157,7 +154,8 @@ header h1 {
 #tracklist {
     margin: 1em;
     padding: 1em;
-    list-style: decimal-leading-zero;
+    /* list-style: decimal-leading-zero; */
+    list-style: decimal;
 }
 .track {
     padding: 1rem;
