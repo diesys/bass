@@ -18,11 +18,11 @@
     <style>
         :root {
             /* MAIN COLOR THEME */
-            --theme-color: rgb(70, 147, 209);
+            --theme-color: rgb(153, 109, 27);
             /* COVER IMG */
-            --cover-img: url("https://images.unsplash.com/photo-1525898181636-29b30c26f6e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=50");
+            --cover-img: url("https://images.unsplash.com/photo-1462965326201-d02e4f455804?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=50");
         }
-        </style>
+    </style>
     <script>
         // SITE THEME (DARK/LIGHT) default is 'dark'
         let theme = 'dark';
@@ -55,7 +55,7 @@
 </head>
 
 <body class="flex dark">
-    <header class="flex column center justify-center">
+    <header class="flex column center justify-center"><span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
         <!-- ALBUM TITLE -->
         <h1>Tuorl</h1>
         <!-- ALBUM BRIEF DESCRIPTION -->
