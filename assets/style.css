@@ -75,7 +75,6 @@ body.light {color: var(--dark-dark);}
 /* HEADER */
 header {
     width: 100vw;
-    min-height: 150px;
     background: var(--cover-img) center center no-repeat;
     background-size: cover;
     user-select: none;
@@ -83,13 +82,37 @@ header {
     text-shadow: 1px 2px 5px #000f !important;
     font-weight: bold;
     text-align: center;
+    overflow: hidden !important;
+    z-index: 0;
 }
+
 header::after {
     content: '';
     width: 100%;
-    height: 6em;
+    height: 5em;
     background: linear-gradient(transparent, var(--theme-color));
 }
+
+header * {
+    z-index: 1;
+}
+
+header.tilt-gradient {
+    padding-bottom: 3em;
+}
+header.tilt-gradient::after {
+    width: calc(100% + 3em);
+    height: 14em;
+    background: linear-gradient(transparent, var(--theme-color));
+    transform: rotate(-6deg);
+    top: 5em;
+    position: absolute;
+    transition: var(--trans-a);
+}
+.dark header.tilt-gradient::after {filter: brightness(1.05);}
+.light header.tilt-gradient::after {filter: brightness(.95);}
+
+
 header h1 {
     background: linear-gradient(var(--dark-color-semialpha), transparent);
     margin: 0;
@@ -107,8 +130,8 @@ header h1 {
     background-size: contain;
     width: 4em;
     height: 4em;
-    /* transition: all .3s ease-out; */
     border-radius: 1em;
+    z-index: 2;
 }
 .light #theme_toggle {
     filter: invert(1);
@@ -123,6 +146,7 @@ header h1 {
 .main-content>#details {
     flex: 1;
     min-width: 350px;
+    z-index: 1;
 }
 .main-content>#details {
     padding: 2em 3em .5em 3em;
@@ -146,6 +170,7 @@ header h1 {
     opacity: .6;
     text-transform: capitalize;
 }
+.track::marker {font-size: .8rem;}
 .track:hover, 
 .track:focus, 
 .track:active, 
@@ -177,6 +202,7 @@ header h1 {
     margin: 0;
     flex-wrap: wrap-reverse !important;
     transition: var(--trans-a) !important;
+    z-index: 3;
 }
 .dark #player {
     background: linear-gradient(transparent, var(--dark-color-semialpha));
