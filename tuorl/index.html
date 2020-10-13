@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- meta-info -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tuorl BASS Album experiment by Luke">
+    <meta name="keywords" content="bass,music,album,jazz,prog,rock,midi,opensource">
+    
+    <title>Tuorl @ LukeMusic</title>
+
+    <!-- custom open font -->
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/trueno" type="text/css" />
+
+    <!-- custom style by flowin.space -->
+    <link rel="stylesheet" href="../assets/style.min.css" type="text/css" />
+    <style>
+        :root {
+            --theme-color: #3a9;
+            --theme-color2: #fc1;
+            --cover-img: url("https://images.unsplash.com/photo-1445985543470-41fba5c3144a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=50");
+        }
+    </style>
+</head>
+
+<body class="flex dark">
+    <header class="flex column center justify-center">
+        <h1>Tuorl</h1>
+        <p>Experimental BASS album</p>
+    </header>
+
+    <div class="main-content flex">
+        <ol class="tracklist" start="0">
+            <li class="track" data-audiosrc="00_(intro)_Stadtpark.mp3">
+                Stadtpark (intro)</li>
+            <li class="track" data-audiosrc="01_Phoenix.mp3">
+                Phoenix</li>
+            <li class="track" data-audiosrc="02_Duetto.mp3">
+                Duetto</li>
+            <li class="track" data-audiosrc="03_1276.mp3">
+                1276</li>
+            <li class="track" data-audiosrc="04_Yo.mp3">
+                Yo</li>
+            <li class="track" data-audiosrc="05_Young_Dragon.mp3">
+                Young Dragon</li>
+            <li class="track" data-audiosrc="06_Gasta_Cojim.mp3">
+                Gasta Cojim</li>
+        </ol>
+
+        <section class="details">
+            <p><b>Tuorl</b> is (sort of) a BASS album (or maybe BASS-Jazz-Funky-(prog)Rock-??...).
+                All instruments are MIDI except BASS of course (and some small parts on violin, flute and guitar...
+                CH played el. guitar, thanks!! :):) ) </p>
+            <p>Used Musescore for arranging, Audacity for recording/editing/mixing</p>
+            <br>
+            <p>Hope you enjoy (at least...something of it)!
+                (contains BASS, headphones or good speakers recommended ;) )</p>
+            <p>Plz give feedback, suggestions and critique 
+                (bassically, the stuff that helps people improve)</p>
+            <p>Ok ciao, thanks! Yo!</p>
+        </section>
+    </div>
+    
+    <footer id="player" class="flex center space-evenly">
+        <span id="now_playing">Choose track</span>
+        <audio src="" controls></audio>
+    </footer>
+
+</body>
+</html>
