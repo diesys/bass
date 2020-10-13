@@ -66,8 +66,16 @@ body.light {color: var(--dark-dark);}
     background: var(--light-color-bitalpha);
     box-shadow: 0 2px 20px -5px #0007;
 }
-
-
+a {
+    color: var(--theme-color);
+    filter: brightness(1.5);
+}
+.big {
+    font-size: 2em; 
+    font-weight: 100;
+    line-height: .5em;
+    display: inline;
+}
 /* MAIN CONTENT */
 .main-content {
     width: 100%;
