@@ -4,13 +4,15 @@
     --dark-color: #111;
     --light-color-semialpha: #eeee;
     --dark-color-semialpha: #111e;
-    --light-btn: #eeee;
-    --dark-btn: #111d;
-    --trans-a: all .5s;
-    --trans-a-delayed: all .5s .25s;
-
     --light-txt-shadow: 1px 1px 4px #fff8;
     --dark-txt-shadow: 1px 2px 5px #000c;
+    
+    --light-btn: #eeee;
+    --dark-btn: #111d;
+    
+    --trans-a: all .5s;
+    --trans-a-delayed: all .5s .25s;
+    --space: 1em;
 
     --cover-img: url("https://images.unsplash.com/photo-1445985543470-41fba5c3144a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=30");
 }
@@ -127,7 +129,7 @@ header h1 {
     background-size: contain;
     width: 3.2em;
     height: 3.2em;
-    border-radius: 1em;
+    border-radius: var(--space);
     z-index: 2;
 }
 .light #theme_toggle {
@@ -161,7 +163,7 @@ header h1 {
     padding: 1rem;
     padding-left: 0;
     margin: 1rem;
-    border-radius: 1em;
+    border-radius: var(--space);
     cursor: pointer;
     transition: var(--trans-a) !important;
     user-select: none;
@@ -221,4 +223,27 @@ header h1 {
     flex: 1;
     padding: 1em;
     text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+    .track {
+        padding: 1rem;
+        padding-left: 0;
+        margin: 0;
+        border-radius: 0;
+    }
+    header::after {
+        padding-bottom: 0;
+        transform: rotate(0) !important;
+        /* bottom: 0px !important; */
+        position: relative !important;
+        filter: none !important;
+        width: 100% !important;
+        height: 5em !important;
+        /* bottom: 0 !important; */
+        top: 0 !important;
+    }
+    header {
+        padding: 0 !important;
+    }
 }
