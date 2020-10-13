@@ -70,6 +70,9 @@ header h1 {
 }
 
 /* MAIN CONTENT */
+.dark .main-content {text-shadow: var(--dark-txt-shadow) !important;}
+.light .main-content {text-shadow: var(--light-txt-shadow) !important;}
+
 .main-content>#tracklist,
 .main-content>#details {
     flex: 1;
@@ -99,13 +102,11 @@ header h1 {
     color: #eee;
     background: #111d;
     box-shadow: 0 2px 10px -4px #000a;
-    text-shadow: var(--dark-txt-shadow) !important;
 }
 .light .track {
     color: #111;
     background: #eeee;
     box-shadow: 0 2px 20px -5px #0007;
-    text-shadow: var(--light-txt-shadow) !important;
 }
 .track:hover, 
 .track:focus, 
