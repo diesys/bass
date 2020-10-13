@@ -223,6 +223,7 @@ header h1 {
     flex: 1;
     padding: 1em;
     text-align: center;
+    min-width: 250px;
 }
 
 @media screen and (max-width: 500px) {
