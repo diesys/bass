@@ -1,5 +1,12 @@
 let tracklist = document.querySelector('#tracklist')
 
+// sets the custom (if set) theme (dark/light)
+if (typeof theme !== 'undefined') {
+    document.querySelector('body').classList.remove('dark');
+    document.querySelector('body').classList.remove('light');
+    document.querySelector('body').classList.add(theme);
+}
+
 // sets the custom (if set) numbering to track list order
 if (typeof first_track !== 'undefined') {
     tracklist.setAttribute('start', first_track);
