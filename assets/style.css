@@ -2,9 +2,9 @@
     --theme-color: #3a9;
     --light-color: #eee;
     --dark-color: #111;
-    --light-color-bitalpha: #eeee;
+    --light-color-bitalpha: #eeec;
     --dark-color-bitalpha: #111e;
-    --light-color-semialpha: #eee8;
+    --light-color-semialpha: #eee6;
     --dark-color-semialpha: #1118;
     --light-txt-shadow: 1px 1px 4px #fff8;
     --dark-txt-shadow: 1px 2px 5px #000c;
@@ -115,11 +115,16 @@ header.tilt-gradient::after {
 .dark header.tilt-gradient::after {filter: brightness(1.05);}
 .light header.tilt-gradient::after {filter: brightness(.95);}
 header h1 {
-    background: linear-gradient(var(--dark-color-bitalpha), transparent);
     margin: 0;
     padding: 2em 0 1em 0;
     flex: 1;
     width: 100%;
+}
+.light header h1 {
+    background: linear-gradient(var(--light-color-bitalpha), transparent);
+}
+.dark header h1 {
+    background: linear-gradient(var(--dark-color-bitalpha), transparent);
 }
 #theme_toggle {
     position: absolute;
@@ -207,12 +212,12 @@ header h1 {
     z-index: 3;
 }
 .dark #player {
-    background: linear-gradient(transparent, var(--dark-color-bitalpha));
+    background: linear-gradient(transparent, var(--dark-color-bitalpha) 70%);
     color: var(--light-color);
     text-shadow: var(--dark-txt-shadow) !important;
 }
 .light #player {
-    background: linear-gradient(transparent, var(--light-color-bitalpha));
+    background: linear-gradient(transparent, var(--light-color-bitalpha) 70%);
     color: var(--dark-color);
     text-shadow: var(--light-txt-shadow) !important;
 }
@@ -236,8 +241,13 @@ header h1 {
         border-radius: 1em;
         overflow-y: hidden;
         /* background: var(--dark-btn); */
-        background-color: var(--dark-color-semialpha);
     }
+    .dark #tracklist {
+        background-color: var(--dark-color-semialpha);
+        box-shadow: var(--dark-txt-shadow);}
+        .light #tracklist {
+            background-color: var(--light-color-semialpha);
+            box-shadow: var(--light-txt-shadow);}
     .track {
         padding: 1rem;
         padding-left: 0;
