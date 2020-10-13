@@ -97,6 +97,7 @@ header h1 {
     transition: all .5s;
     user-select: none;
     opacity: .6;
+    text-transform: capitalize;
 }
 .dark .track {
     color: #eee;
@@ -118,12 +119,14 @@ header h1 {
 .track::before {
     content: '\25ba';
     opacity: 0;
-    transition: opacity .5s;
+    transition: all .5s;
+    margin-right: 0;
 }
 .track:hover::before,
 .track:focus::before,
 .track:active::before,
 .track.active::before {
+    margin-right: .5em;
     opacity: 1;
 }
 
