@@ -168,16 +168,20 @@ header h1 {
 }
 .track {
     padding: 1rem;
-    padding-left: 0;
-    margin: 1rem;
+    /* padding-left: 0; */
+    margin: .9rem;
     border-radius: var(--space);
     cursor: pointer;
     transition: var(--trans-a) !important;
     user-select: none;
     opacity: .6;
+    /* display: flex; */
+    align-items: center;
     text-transform: capitalize;
 }
-.track::marker {font-size: .8rem;}
+.track::marker {
+    font-size: .8rem;
+}
 .track:hover, 
 .track:focus, 
 .track:active, 
@@ -185,18 +189,36 @@ header h1 {
     opacity: .9;
     padding-left: 1rem;
 } 
-.track::before {
-    content: '\25ba';
+.track > .play {
+    display: flex;
+}
+.track >.play::before {
+/* .track > .play { */
+    /* content: '\25ba'; */
+    content: '';
+    background: no-repeat url('play.png') center center;
+    background-size: contain;
+    width: .6em;
+    height: 1.3em;
+    padding: 0;
     opacity: 0;
     transition: all .5s;
     margin-right: 0;
+    display: inline-block;
+    filter: invert(1);
+    transform-origin: 50% 50%;
 }
-.track:hover::before,
-.track:focus::before,
-.track:active::before,
-.track.active::before {
-    margin-right: .5em;
+.track:hover > .play::before,
+.track:focus > .play::before,
+.track:active > .play::before,
+.track.active > .play::before {
+/* .track:hover > .play,
+.track:focus > .play,
+.track:active > .play,
+.track.active > .play { */
+    margin-right: .6em;
     opacity: 1;
+    width: 2em;
 }
 
 /* PLAYER */

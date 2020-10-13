@@ -39,7 +39,7 @@ if (typeof first_track !== 'undefined') {
 // array contains everything needed
 album.forEach(function (track) {
     let li = document.createElement('li');
-    li.innerHTML += track.title;
+    li.innerHTML += "<span class='play'>"+track.title+"</span>";
     li.classList.add('track');
     li.classList.add('btn-glass');
     li.setAttribute('data-audiosrc', track.path);
