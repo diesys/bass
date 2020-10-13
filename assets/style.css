@@ -16,7 +16,8 @@
     --trans-a-delayed: all .5s .25s;
     --space: 1em;
 
-    --cover-img: url("https://images.unsplash.com/photo-1445985543470-41fba5c3144a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=30");
+    --cover-img: url("https://images.unsplash.com/photo-1462965326201-d02e4f455804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=30");
+    --background-img: url("https://images.unsplash.com/photo-1571887379176-bec8d6a71fd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=30");
 }
 ::selection {
     color: var(--theme-color);
@@ -87,7 +88,7 @@ a {
 /* HEADER */
 header {
     width: 100vw;
-    background: var(--cover-img) center center no-repeat;
+    background: var(--background-img) center center no-repeat;
     background-size: cover;
     user-select: none;
     color: #fff;
@@ -113,15 +114,40 @@ header.tilt-gradient {
 }
 header.tilt-gradient::after {
     width: calc(100% + 3em);
-    height: 14em;
+    height: 50%;
     background: linear-gradient(transparent, var(--theme-color));
-    transform: rotate(-6deg);
-    top: 5em;
+    transform: rotate(6deg);
+    border-radius: 0 0 0 30%;
+    box-shadow: 0 -10px 50px #0005;
+    top: 50%;
     position: absolute;
     transition: var(--trans-a);
 }
 .dark header.tilt-gradient::after {filter: brightness(1.08);}
 .light header.tilt-gradient::after {filter: brightness(.97);}
+
+header .album-cover {
+    box-shadow: 0 3px 50px 5px #000d;
+    width: 200px;
+    height: 200px;
+    border-radius: 1em;
+    padding: .7em;
+    margin-bottom: 1em;
+}
+.dark header .album-cover {background: var(--light-color-bitalpha);}
+.light header .album-cover {background: var(--dark-color-bitalpha);}
+header .album-cover::after {
+    /* border: 1px solid #0008; */
+    content: '';
+    display: block;
+    position: relative;
+    top: 0;
+    border-radius: .4em;
+    width: 100%;
+    height: 100%;
+    background: no-repeat var(--cover-img);
+    background-size: cover;
+}
 
 header h1 {
     margin: 0;
@@ -286,13 +312,13 @@ header h1 {
     header::after {
         padding-bottom: 0;
         transform: rotate(0) !important;
-        /* bottom: 0px !important; */
         position: relative !important;
+        border-radius: 0 !important;
         filter: none !important;
         width: 100% !important;
         height: 5em !important;
-        /* bottom: 0 !important; */
         top: 0 !important;
+        box-shadow: none !important;
     }
     header {
         padding: 0 !important;
