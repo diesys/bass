@@ -36,16 +36,6 @@ if (typeof first_track !== 'undefined') {
     tracklist.setAttribute('start', first_track);
 }
 
-// array contains everything needed
-album.forEach(function (track) {
-    let li = document.createElement('li');
-    li.innerHTML += "<span class='play'>"+track.title+"</span>";
-    li.classList.add('track');
-    li.classList.add('btn-glass');
-    li.setAttribute('data-audiosrc', track.path);
-    tracklist.appendChild(li);
-});
-
 // binds click on tracks title to the function above
 document.querySelectorAll('.track').forEach(element => {
     element.addEventListener('click', function() {

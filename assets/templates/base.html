@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>{{ TITLE }} | BASS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ DESCRIPTION }}">
+    <meta name="keywords" content="{{ TAGS }}">
+    <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/trueno" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <script src="/assets/js/script.min.js" defer="defer"></script>
+</head>
+
+<!-- loading block? -->
+
+{% if BLOCK == 'list' %}	
+    {% block list %}{% endblock %}
+{% elif BLOCK == 'album' %}
+    {% block album %}{% endblock %}
+{% endif %}
+
+</html>

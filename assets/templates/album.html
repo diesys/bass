@@ -1,92 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <!-- META-INFO -->
-    <title>Tuorl @ LukeMusic</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tuorl BASS Album experiment by Luke">
-    <meta name="keywords" content="bass,music,album,jazz,prog,rock,midi,opensource">
-    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
-    <!-- CUSTOM OPEN FONT -->
-    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/trueno"
-      type="text/css">
-    <!-- CUSTOM STYLE AND SCRIPTING BY FLOWIN.SPACE -->
-    <link rel="stylesheet" href="../assets/style.min.css" type="text/css">
-    <script src="../assets/script.min.js" defer="defer"></script>
-    <!-- CUSTOMIZATIONS FOT EACH ALBUM/PAGE -->
-    <style>
-        :root {
-            /* MAIN COLOR THEME */
-            --theme-color: #33aa7c;
-            /* ALBUM COVER IMG */
-            --cover-img: url("https://images.unsplash.com/photo-1462965326201-d02e4f455804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=30");
-            /* BACKGROUND IMG */
-            --background-img: url("https://images.unsplash.com/photo-1571887379176-bec8d6a71fd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=30");
-        }
-    </style>
-    <script>
-        // SITE THEME (DARK/LIGHT) default is 'dark'
-        let theme = 'dark';
-        // TRACKLIST NUMBERING START-POINT (usually 0 or 1, if removed 1 is default)
-        let first_track = 0;
-        // TRACKLIST NAME/PATH (DO NOT DELETE OR RENAME THIS ARRAY)
-        let album = [{
-            'title': 'Stadtpark (intro)',
-            'path': 'https://bamboo.eigenlab.org/~luke/Music/Tuorl/00_(intro)_Stadtpark.mp3'
-        }, {
-            'title': 'Phoenix',
-            'path': 'https://bamboo.eigenlab.org/~luke/Music/Tuorl/01_Phoenix.mp3'
-        }, {
-            'title': 'Duetto',
-            'path': 'https://bamboo.eigenlab.org/~luke/Music/Tuorl/02_Duetto.mp3'
-        }, {
-            'title': '1276',
-            'path': 'https://bamboo.eigenlab.org/~luke/Music/Tuorl/03_1276.mp3'
-        }, {
-            'title': 'Yo',
-            'path': 'https://bamboo.eigenlab.org/~luke/Music/Tuorl/04_Yo.mp3'
-        }, {
-            'title': 'Young Dragon',
-            'path': 'https://bamboo.eigenlab.org/~luke/Music/Tuorl/05_Young_Dragon.mp3'
-        }, {
-            'title': 'Gasta Cojim',
-            'path': 'https://bamboo.eigenlab.org/~luke/Music/Tuorl/06_Gasta_Cojim.mp3'
-        }];
-    </script>
-  </head>
-  <body class="flex dark">
-    <header class="tilt-gradient flex column center justify-center"><span id="theme_toggle"
-        onclick="toggleTheme();" class="btn-glass"></span>
-      <!-- ALBUM TITLE -->
-      <h1>Tuorl</h1>
-      <span class="album-cover"></span>
-      <!-- ALBUM BRIEF DESCRIPTION and/or ARTISTS -->
-      <p>Experimental BASS album</p>
+{% extends "base.html" %}
+
+{% block album %}
+<body class="flex {% if ALBUM.THEME != 'light' %}dark{% else %}light{% endif %}">
+    <!-- updates the css var theme color -->
+    <script>document.documentElement.style.setProperty('--theme-color', "{{ ALBUM.COLOR }}")</script>
+    
+    <!-- album title, author and images -->
+    <header class="tilt-gradient flex column center justify-center" style="background-image: url('{{ ALBUM.BACKGROUND }}');">
+        <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
+        <h1>{{ ALBUM.TITLE | safe }}</h1>
+        <span class="album-cover"><span class="img" style="background-image: url('{{ ALBUM.COVER }}');"></span></span>
+        <p>{{ ALBUM.AUTHOR | safe }}</p>
     </header>
+    
+    <!-- tracklist and infos -->
     <section class="main-content flex">
-      <ol id="tracklist">
-      </ol>
-      <div id="details">
-        <!-- ALBUM FULL DETAILS/CREDITS -->
-        <p><u>Tuorl</u> is (sort of) a BASS album (or maybe
-          BASS-Jazz-Funky-(prog)Rock-??...). All instruments are MIDI except
-          BASS of course (and some small parts on violin, flute and guitar... CH
-          played el. guitar, thanks!! <span class="big">☻☻</span>)</p>
-        <p>Hope you enjoy (at least...something of it)!, Plz give feedback,
-          suggestions and critique (bassically, the stuff that helps people
-          improve)!</p>
-        <p>Warning: contains BASS, headphones or good speakers recommended <span class="big">☻</span></p>
-        <p>Ok ciao, thanks! Yo!</p>
-        <p><br>
-        </p>
-        <p>Arranging: <a href="https://musescore.org/en" title="Musescore" target="_blank">Musescore</a>
-          - recording/editing/mixing: <a href="Musescore%20" title="https://www.audacityteam.org/"
-            target="_blank">Audacity</a></p>
-      </div>
+        <ol id="tracklist" start="{{ ALBUM.FIRST_TRACK }}">{% for TRACK in ALBUM.TRACKLIST %}
+            <li class="track btn-glass" data-audiosrc="{{ TRACK.PATH }}">
+                <span class="play">{{ TRACK.TITLE | safe }}</span>
+            </li>{% endfor %}
+        </ol>
+        <div id="details">
+            <p>{{ ALBUM.DESCRIPTION | safe }}</p>
+            <p id="credits">{{ ALBUM.CREDITS | safe }}</p>
+        </div>
     </section>
-    <!-- PLAYER, DO NOT TOUCH -->
-    <footer id="player" class="flex center space-evenly"><span id="now_playing">No
-        track</span><audio src="#" controls="controls"></audio></footer>
-  </body>
-</html>
+    
+    <!-- player -->
+    <footer id="player" class="flex center space-evenly">
+        <span id="now_playing">No track</span>
+        <audio src="#" controls="controls"></audio>
+    </footer>
+</body>
+
+{% endblock %}
