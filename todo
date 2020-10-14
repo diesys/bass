@@ -4,3 +4,24 @@
 
 - https://rapidapi.com/theaudiodb/api/theaudiodb
 - https://www.theaudiodb.com/
+
+- versione album covers con la cover con un before radial gradient a fare effetto luce in alto
+
+
+- mobile togliere boxshadow da .track,
+
+- meglio tracklist mobile light Shadow (invertita)
+
+- mettere immagini ui (play e giornonotte) come base64, così Luke può usare il raw di gitlab come cdn
+
+- spazio per i credits in basso
+
+- cambiare no track
+
+- 2 template: album (pronto), list 
+
+- list templ: con scan della directory in cui è chiamato e vede le sottocartelle depth 1
+
+- homepage: usare list temp ma con immagine diversa e colore random da py
+
+- home view: space evenly e centered flex cover art e modalità lista (tramite solo classi css) così le transizioni sono fluide (altrimenti se va lento al click mettere online transition none o animazione appari/scompari. Usare stessi elementi cambiare dimensioni e Flex. Per lista usare i btn-glsss già presenti

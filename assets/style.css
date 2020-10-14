@@ -106,7 +106,7 @@ header::after {
     height: 5em;
     background: linear-gradient(transparent, var(--theme-color));
 }
-header * {
+header * {`
     z-index: 1;
 }
 header.tilt-gradient {
@@ -118,7 +118,8 @@ header.tilt-gradient::after {
     background: linear-gradient(transparent, var(--theme-color));
     transform: rotate(6deg);
     border-radius: 0 0 0 30%;
-    box-shadow: 0 -10px 50px #0005;
+    /* box-shadow: 0 -10px 50px #0005; */
+    box-shadow: 0 3em 3em #0005;
     top: 50%;
     position: absolute;
     transition: var(--trans-a);
@@ -127,15 +128,20 @@ header.tilt-gradient::after {
 .light header.tilt-gradient::after {filter: brightness(.97);}
 
 header .album-cover {
-    box-shadow: 0 3px 50px 5px #000d;
     width: 200px;
     height: 200px;
     border-radius: 1em;
     padding: .7em;
     margin-bottom: 1em;
 }
-.dark header .album-cover {background: var(--light-color-bitalpha);}
-.light header .album-cover {background: var(--dark-color-bitalpha);}
+.dark header .album-cover {
+    background: var(--dark-color-bitalpha);
+    box-shadow: 0 3px 50px 5px #000d;
+}
+.light header .album-cover {
+    background: var(--light-color-bitalpha);
+    box-shadow: 0 3px 50px -5px #0009;
+}
 header .album-cover::after {
     /* border: 1px solid #0008; */
     content: '';
@@ -193,6 +199,10 @@ header h1 {
     padding: 2em 3em .5em 3em;
     transition: var(--trans-a) !important;
 }
+.light .main-content>#details a {
+    filter: brightness(.5);
+}
+
 
 /* TRACKLIST */
 #tracklist {
@@ -294,21 +304,25 @@ header h1 {
         margin: 2em;
         border-radius: 1em;
         overflow-y: hidden;
-        /* background: var(--dark-btn); */
     }
     .dark #tracklist {
         background-color: var(--dark-color-semialpha);
-        box-shadow: var(--dark-txt-shadow);}
-        .light #tracklist {
-            background-color: var(--light-color-semialpha);
-            box-shadow: var(--light-txt-shadow);}
+        box-shadow: var(--dark-txt-shadow);
+    }
+    .light #tracklist {
+        background-color: var(--light-color-semialpha);
+        box-shadow: var(--light-txt-shadow);
+    }
     .track {
         padding: 1rem;
         padding-left: 0;
         margin: 0 0 0 1.6em;
         border-radius: 0;
         background-color: var(--dark-color-semialpha);
+        box-shadow: none !important;
+        border-bottom: 1px solid #6666 !important;
     }
+    #tracklist .track:last-child {border-bottom: none !important;}
     header::after {
         padding-bottom: 0;
         transform: rotate(0) !important;
