@@ -10,7 +10,7 @@
         <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
         <h1>{{ ALBUM.TITLE | safe }}</h1>
         <span class="album-cover"><span class="img" style="background-image: url('{{ ALBUM.COVER }}');"></span></span>
-        <p>{{ ALBUM.AUTHOR | safe }}</p>
+        <p class="flex center">{{ ALBUM.AUTHOR | safe }} <span class="year-label">{{ ALBUM.YEAR | safe }}</span></p>
     </header>
     
     <!-- tracklist and infos -->
