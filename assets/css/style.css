@@ -2,8 +2,8 @@
     --theme-color: #3a9;
     --light-color: #eee;
     --dark-color: #111;
-    --light-color-bitalpha: #eee5;
-    --dark-color-bitalpha: #111e;
+    --light-color-bitalpha: #eee6;
+    --dark-color-bitalpha: #111c;
     --light-color-semialpha: #eee2;
     --dark-color-semialpha: #1118;
 
@@ -16,7 +16,6 @@
     
     --light-btn: #eeee;
     --dark-btn: #111d;
-    
     
     --trans-a: all .5s;
     --trans-a-delayed: all .5s .25s;
