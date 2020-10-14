@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block list %}
+<body class="flex {% if THEME != 'light' %}dark{% else %}light{% endif %}">
+    <!-- updates the css var theme color -->
+    <!-- <script>document.documentElement.style.setProperty('--theme-color', "{#{ ALBUM.COLOR }#}")</script> -->
+    
+    <!-- album title, author and images -->
+    <header class="tilt-gradient flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND }}');">
+        <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
+        <h1>{{ AUTHOR | safe }}</h1>
+        <!-- <span class="album-cover"><span class="img" style="background-image: url('{#{ ALBUM.COVER }#}');"></span></span> -->
+        <!-- <p class="flex center">{#{ ALBUM.AUTHOR | safe }#} <span class="year-label">{#{ ALBUM.YEAR | safe }#}</span></p> -->
+    </header>
+    
+    <!-- tracklist and infos -->
+    <section class="main-content flex">
+        {% for ENTRY in LIST.ITEMS %}
+            <a class="track btn-glass" href="{{ ENTRY.URL | safe }}">
+                <span class="album-cover">
+                    <span class="img" style="background-image: url('{{ ENTRY.COVER }}');"></span>
+                </span>
+                <span class="play">{{ ENTRY.TITLE | safe }}</span>
+            </a>
+        {% endfor %}
+    </section>
+    
+    <!-- player -->
+    <!-- <footer id="player" class="flex center space-evenly">
+        <span id="now_playing">No track</span>
+        <audio src="#" controls="controls"></audio>
+    </footer> -->
+</body>
+
+{% endblock %}

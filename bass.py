@@ -28,6 +28,24 @@ def getAlbum(album_author, album_name, verbose=False):
         return album
     return False
 
+def getList(author, verbose=False):
+    """Builds album list for the given author"""
+
+    list = {'INFO':{}, 'ITEMS': []}
+    author_dir = f"{audio_dir}/{author}"
+    if os.path.exists(author_dir):
+        for filename in os.listdir(author_dir):
+            if filename.endswith('.json'):
+                f = open(f"{author_dir}/{filename}", encoding="utf-8")
+                album = json.load(f)
+                list['ITEMS'].append({
+                    'TITLE': album['TITLE'],
+                    'COVER': album['COVER'],
+                    'URL': f"{author}/{filename.split('.')[0]}",
+                    })
+        list['INFO']['BACKGROUND'] = list['ITEMS'][0]['COVER']
+    return list
+
 ######## FLASK SERVER APP ##############
 app = Flask(__name__, static_url_path="/assets", static_folder='assets')
 
@@ -44,6 +62,12 @@ def album(author, album):
     """Album page"""
     curr_album = getAlbum(author, album)
     return env.get_template('album.html').render(TITLE=curr_album['TITLE'], ALBUM=curr_album, BLOCK='album')
+
+@app.route("/a/<author>")
+def artist(author):
+    """Artist page"""
+    curr_list = getList(author)
+    return env.get_template('list.html').render(TITLE='Lista', AUTHOR=author, LIST=curr_list, BLOCK='list')
 
 # @app.route("/m/<path:filename>")
 # def staticMenuFiles(filename):
