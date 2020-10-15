@@ -19,13 +19,15 @@
     --light-btn: #eeee;
     --dark-btn: #111d;
     
-    --rotateX-deg: 24deg;
-
+    
     --duration: .5s;
     --trans-a: all var(--duration);
     --trans-a-delayed: all var(--duration) calc(.5 * var(--duration));
     
+    --rotateX-deg: 24deg;
     --fade-in: fade-in calc(2 * var(--duration));
+    --fade-scale-in: fade-scale-in calc(2 * var(--duration));
+    --weak-fade-in: weak-fade-in calc(2 * var(--duration));
     --rotateX-in: rotateX-in calc(2 * var(--duration));
     
     --cover-img: url("https://images.unsplash.com/photo-1462965326201-d02e4f455804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=30");
@@ -40,8 +42,16 @@
 
 
 @keyframes fade-in {
+    0% {opacity: 0;} 
+    100% {opacity: 1;}
+}
+@keyframes weak-fade-in {
+    0% {opacity: .7;} 
+    100% {opacity: 1;}
+}
+@keyframes fade-scale-in {
     0% {
-        opacity: 0;
+        opacity: .4;
         transform: scale(.9) translateY(1rem);
     } 100% {opacity: 1;}
 }
@@ -62,6 +72,10 @@
 .flex.center {align-items: center;}
 .flex.justify-center {justify-content: center;}
 .flex.space-evenly {justify-content: space-evenly;}
+
+/* starting animation */
+html {background: #000 !important;}
+header, footer {animation: var(--weak-fade-in);}
 
 body {
     margin: 0;
@@ -158,7 +172,7 @@ header.tilt-gradient::after {
     perspective: 350px;
     transform-style: preserve-3d;
     margin: 1em;
-    animation: var(--fade-in);
+    animation: var(--fade-scale-in);
 }
 .main-content.rotateX .album-element {animation: var(--rotateX-in);}
 .main-content.alternate .album-element:nth-child(odd) .album-cover {transform: rotateX(calc(-.5 *var(--rotateX-deg)));}
