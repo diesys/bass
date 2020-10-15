@@ -1,15 +1,21 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 
-from __future__ import (print_function, absolute_import, division, unicode_literals)
-from builtins import (filter, open, str)
-from future import standard_library
-standard_library.install_aliases()
+# from __future__ import (print_function, absolute_import, division, unicode_literals)
+# from builtins import (filter, open, str)
+# from future import standard_library
+# standard_library.install_aliases()
 ## up py3 compatibility => pip install future, below is valid py3
 import re, os, sys, json
 from jinja2 import Environment, select_autoescape, FileSystemLoader
 from flask import Flask, redirect, send_from_directory, request, flash, url_for #, session 
 # from flask_login import login_user, current_user, logout_user, login_required
 # import telegram
+
+######## FLASK SERVER APP ##############
+app = Flask(__name__, static_url_path="/assets", static_folder='assets')
+# if __name__ == '__main__':
+    # app.run(host='127.0.0.1', port=5000)
+    # app.run(host='192.168.1.9', port=5000)
 
 template_dir = 'assets/templates'
 audio_dir = 'audio'
@@ -46,9 +52,6 @@ def getList(author, verbose=False):
                     })
         list['INFO']['BACKGROUND'] = list['ITEMS'][0]['COVER']
     return list
-
-######## FLASK SERVER APP ##############
-app = Flask(__name__, static_url_path="/assets", static_folder='assets')
 
 ######## HOMEPAGE
 # @app.route("/")

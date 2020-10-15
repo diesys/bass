@@ -14,13 +14,20 @@
     --light-box-shadow: 0 2px 20px -5px #0007;
     --white-box-shadow: 0 2px 20px -5px #fff7;
     
+    --space: 1em;
+    
     --light-btn: #eeee;
     --dark-btn: #111d;
     
-    --trans-a: all .5s;
-    --trans-a-delayed: all .5s .25s;
-    --space: 1em;
+    --rotateX-deg: 24deg;
 
+    --duration: .5s;
+    --trans-a: all var(--duration);
+    --trans-a-delayed: all var(--duration) calc(.5 * var(--duration));
+    
+    --fade-in: fade-in calc(2 * var(--duration));
+    --rotateX-in: rotateX-in calc(2 * var(--duration));
+    
     --cover-img: url("https://images.unsplash.com/photo-1462965326201-d02e4f455804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=30");
     --background-img: url("https://images.unsplash.com/photo-1571887379176-bec8d6a71fd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=30");
 }
@@ -30,6 +37,21 @@
 }
 .dark ::selection {background: var(--dark-color);}
 .light ::selection {background: var(--light-color);}
+
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: scale(.9) translateY(1rem);
+    } 100% {opacity: 1;}
+}
+@keyframes rotateX-in {
+    0% {
+        opacity: .5;
+        transform: scale(.9) rotateX(90deg);
+    } 100% {opacity: 1;}
+}
+
 
 * {
     box-sizing: border-box;
@@ -54,7 +76,7 @@ body.light {color: var(--dark-dark);}
 
 .btn-glass {
     opacity: .7;
-    transition: var(--trans-a-delayed) ease-in-out !important;
+    transition: var(--trans-a) ease-in-out !important;
     cursor: pointer;
 }
 .btn-glass:focus,
@@ -63,7 +85,7 @@ body.light {color: var(--dark-dark);}
     opacity: 1 !important;
 }
 .btn-glass:active {
-    transform: rotateX(40deg);
+    transform: rotateX(calc(1.5 * var(--rotateX-deg)));
 }
 .dark .btn-glass {
     color: var(--light-color);
@@ -96,7 +118,6 @@ header {
     text-shadow: 1px 2px 5px #000f !important;
     font-weight: bold;
     text-align: center;
-    /* overflow-x: hidden !important; */
     z-index: 0;
     position: relative;
     top: -1px;
@@ -124,23 +145,26 @@ header.tilt-gradient::after {
     position: absolute;
     transition: var(--trans-a);
     pointer-events: none;
+    border-bottom: 4px solid #fff3;
 }
-.dark header.tilt-gradient::after {filter: brightness(1.08) hue-rotate(8deg);}
-.light header.tilt-gradient::after {filter: brightness(.97) hue-rotate(-8deg);}
+.dark header.tilt-gradient::after {filter: brightness(.9) hue-rotate(8deg);}
+.light header.tilt-gradient::after {filter: brightness(1.08) hue-rotate(-8deg);}
 /* list albums */
 .album-element {
-    transition: transform .5s; 
+    transition: transform var(--duration); 
     /* transform: rotateX(0deg) scaleZ(1); */
     transform-style: preserve-3d;
     transform: rotateX(0deg);
     perspective: 350px;
     transform-style: preserve-3d;
     margin: 1em;
+    animation: var(--fade-in);
 }
-.main-content.alternate .album-element:nth-child(odd) .album-cover {transform: rotateX(-12deg);}
-.main-content.alternate .album-element:nth-child(even) .album-cover {transform: rotateX(12deg);}
+.main-content.rotateX .album-element {animation: var(--rotateX-in);}
+.main-content.alternate .album-element:nth-child(odd) .album-cover {transform: rotateX(calc(-.5 *var(--rotateX-deg)));}
+.main-content.alternate .album-element:nth-child(even) .album-cover {transform: rotateX(calc(.5 *var(--rotateX-deg)));}
 .album-element .album-cover {
-    transform: rotateX(24deg);
+    transform: rotateX(var(--rotateX-deg));
 }
 .album-element .album-cover:hover {
     transform: rotateX(0deg) !important;
@@ -172,7 +196,10 @@ header.tilt-gradient::after {
     height: 100%;
     background: no-repeat var(--cover-img);
     background-size: cover;
+    transition: box-shadow var(--duration);
 }
+.light .album-cover > .img {box-shadow: 0 1px 1em 2px var(--light-color);}
+.dark .album-cover > .img {box-shadow: 0 1px 1em 2px var(--dark-color);}
 header h1 {
     margin: 0;
     padding: 2em 0 1em 0;
@@ -230,7 +257,6 @@ header .year-label {
     border-radius: .5em;
     padding: .4em;
     text-align: center;
-    margin-left: .8em;
     color: var(--theme-color);
 }
 .dark header .year-label {
@@ -238,7 +264,7 @@ header .year-label {
 }
 .light header .year-label {
     text-shadow: none !important;
-    color: var(--dark-color-semialpha);
+    color: var(--dark-color-bitalpha);
     background: var(--light-color-bitalpha);
 }
 
@@ -278,26 +304,21 @@ header .year-label {
 }
 .track {
     padding: .7rem;
-    /* padding-left: 0; */
     margin: .4rem;
     border-radius: var(--space);
     cursor: pointer;
     transition: var(--trans-a) !important;
     user-select: none;
     opacity: .6;
-    /* display: flex; */
     align-items: center;
     text-transform: capitalize;
 }
-.track::marker {
-    font-size: .8rem;
-}
+.track::marker {font-size: .8rem;}
 .track:hover, 
 .track:focus, 
 .track:active, 
 .track.active {
     opacity: .9;
-    padding-left: 1rem;
 } 
 .track > .play {
     display: flex;
@@ -311,7 +332,7 @@ header .year-label {
     height: 1.3em;
     padding: 0;
     opacity: 0;
-    transition: opacity .5s;
+    transition: all var(--duration);
     margin-right: 0;
     display: inline-block;
     transform-origin: 50% 50%;
