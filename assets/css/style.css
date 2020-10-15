@@ -19,7 +19,6 @@
     --light-btn: #eeee;
     --dark-btn: #111d;
     
-    
     --duration: .5s;
     --trans-a: all var(--duration);
     --trans-a-delayed: all var(--duration) calc(.5 * var(--duration));
@@ -397,13 +396,18 @@ header .year-label {
     min-width: 250px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
+    .main-content {
+        padding-top: 0 !important;
+    }
     #tracklist {
         box-shadow: var(--dark-txt-shadow);
-        padding: 0;
-        margin: 2em;
+        padding: 0 !important;
+        margin: 0 2em 2em 2em;
         border-radius: 1em;
         overflow-y: hidden;
+        position: relative;
+        top: calc(-2 * var(--space));
     }
     .dark #tracklist {
         background-color: var(--dark-color-semialpha);
@@ -433,6 +437,7 @@ header .year-label {
         height: 5em !important;
         top: 0 !important;
         box-shadow: none !important;
+        border-bottom: 0 !important;
     }
     header {
         padding: 0 !important;
