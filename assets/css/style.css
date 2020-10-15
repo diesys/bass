@@ -85,13 +85,6 @@ a {
     line-height: .5em;
     display: inline;
 }
-/* MAIN CONTENT */
-.main-content {
-    width: 100%;
-    padding-bottom: 8em;
-}
-.dark .main-content {background: linear-gradient(var(--theme-color), var(--dark-color));}
-.light .main-content {background: linear-gradient(var(--theme-color), var(--light-color));}
 
 /* HEADER */
 header {
@@ -250,10 +243,18 @@ header .year-label {
 }
 
 /* MAIN CONTENT */
-.main-content {padding: 4em 1em 1em 1em;}
-.dark .main-content {text-shadow: var(--dark-txt-shadow) !important;}
-.light .main-content {text-shadow: var(--light-txt-shadow) !important;}
-
+.main-content {
+    width: 100%;
+    padding: 4em 1em 8em 1em;
+}
+.dark .main-content {
+    text-shadow: var(--dark-txt-shadow) !important;
+    background: linear-gradient(var(--theme-color), var(--dark-color));
+}
+.light .main-content {
+    text-shadow: var(--light-txt-shadow) !important;
+    background: linear-gradient(var(--theme-color), var(--light-color));
+}
 .main-content>#tracklist,
 .main-content>#details {
     flex: 1;
