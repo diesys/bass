@@ -7,7 +7,7 @@ standard_library.install_aliases()
 ## up py3 compatibility => pip install future, below is valid py3
 import re, os, sys, json
 from jinja2 import Environment, select_autoescape, FileSystemLoader
-from flask import Flask, redirect, send_from_directory, request, flash, url_for, Markup #, session 
+from flask import Flask, redirect, send_from_directory, request, flash, url_for #, session 
 # from flask_login import login_user, current_user, logout_user, login_required
 # import telegram
 
@@ -41,7 +41,8 @@ def getList(author, verbose=False):
                 list['ITEMS'].append({
                     'TITLE': album['TITLE'],
                     'COVER': album['COVER'],
-                    'URL': f"{author}/{filename.split('.')[0]}",
+                    # 'URL': f"{author}/{filename.split('.')[0]}",
+                    'URL': f"{filename.split('.')[0]}",
                     })
         list['INFO']['BACKGROUND'] = list['ITEMS'][0]['COVER']
     return list
@@ -57,17 +58,17 @@ app = Flask(__name__, static_url_path="/assets", static_folder='assets')
 #     # return send_from_directory(f"{app.root_path}/{template_dir}", "index.html")
 #     return env.get_template('album.html').render(ALBUM=getAlbum(album), BLOCK='album')
 
-@app.route("/a/<author>/<album>")
+@app.route("/a/<author>/<album>/")
 def album(author, album):
     """Album page"""
     curr_album = getAlbum(author, album)
     return env.get_template('album.html').render(TITLE=curr_album['TITLE'], ALBUM=curr_album, BLOCK='album')
 
-@app.route("/a/<author>")
+@app.route("/a/<author>/")
 def artist(author):
     """Artist page"""
     curr_list = getList(author)
-    return env.get_template('list.html').render(TITLE='Lista', AUTHOR=author, LIST=curr_list, BLOCK='list')
+    return env.get_template('list.html').render(TITLE=author, AUTHOR=author, LIST=curr_list, BLOCK='list')
 
 # @app.route("/m/<path:filename>")
 # def staticMenuFiles(filename):

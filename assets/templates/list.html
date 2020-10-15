@@ -6,22 +6,19 @@
     <!-- <script>document.documentElement.style.setProperty('--theme-color', "{#{ ALBUM.COLOR }#}")</script> -->
     
     <!-- album title, author and images -->
-    <header class="tilt-gradient flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND }}');">
+    <header class="tilt-gradient flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND | safe }}');">
         <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
         <h1>{{ AUTHOR | safe }}</h1>
-        <!-- <span class="album-cover"><span class="img" style="background-image: url('{#{ ALBUM.COVER }#}');"></span></span> -->
         <!-- <p class="flex center">{#{ ALBUM.AUTHOR | safe }#} <span class="year-label">{#{ ALBUM.YEAR | safe }#}</span></p> -->
     </header>
     
-    <!-- tracklist and infos -->
-    <section class="main-content flex">
+    <!-- tracklist and infos / 'alternate' class gives alternate odd/even perspective for album covers -->
+    <section class="main-content flex center space-evenly">
         {% for ENTRY in LIST.ITEMS %}
-            <a class="track btn-glass" href="{{ ENTRY.URL | safe }}">
-                <span class="album-cover">
-                    <span class="img" style="background-image: url('{{ ENTRY.COVER }}');"></span>
-                </span>
-                <span class="play">{{ ENTRY.TITLE | safe }}</span>
-            </a>
+            <span class="flex column center album-element">
+                <a class="btn-glass album-cover" href="{{ ENTRY.URL | safe }}"><span class="img" style="background-image: url('{{ ENTRY.COVER | safe }}');"></span></a>
+                <span class="title">{{ ENTRY.TITLE | safe }}</span>
+            </span>
         {% endfor %}
     </section>
     

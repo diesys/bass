@@ -121,23 +121,41 @@ header.tilt-gradient::after {
     width: calc(100% + 3em);
     height: 50%;
     background: linear-gradient(transparent, var(--theme-color));
-    transform: rotate(6deg);
-    border-radius: 0 0 0 30%;
-    /* box-shadow: 0 -10px 50px #0005; */
+    transform: rotate(-5deg);
+    border-radius: 0 0 80% 0;
     box-shadow: 0 3em 3em #0005;
-    top: 50%;
+    top: calc(50% + 1.5em);
     position: absolute;
     transition: var(--trans-a);
+    pointer-events: none;
 }
-.dark header.tilt-gradient::after {filter: brightness(1.08);}
-.light header.tilt-gradient::after {filter: brightness(.97);}
-
-header .album-cover {
+.dark header.tilt-gradient::after {filter: brightness(1.08) hue-rotate(8deg);}
+.light header.tilt-gradient::after {filter: brightness(.97) hue-rotate(-8deg);}
+/* list albums */
+.album-element {
+    transition: transform .5s; 
+    /* transform: rotateX(0deg) scaleZ(1); */
+    transform-style: preserve-3d;
+    transform: rotateX(0deg);
+    perspective: 350px;
+    transform-style: preserve-3d;
+    margin: 1em;
+}
+.main-content.alternate .album-element:nth-child(odd) .album-cover {transform: rotateX(-12deg);}
+.main-content.alternate .album-element:nth-child(even) .album-cover {transform: rotateX(12deg);}
+.album-element .album-cover {
+    transform: rotateX(24deg);
+}
+.album-element .album-cover:hover {
+    transform: rotateX(0deg) !important;
+}
+.album-cover {
     width: 200px;
     height: 200px;
     border-radius: 1em;
     padding: .7em;
     margin-bottom: 1em;
+    display: block;
 }
 .dark header .album-cover {
     background: var(--dark-color-bitalpha);
@@ -147,8 +165,9 @@ header .album-cover {
     background: var(--light-color-bitalpha);
     box-shadow: 0 3px 50px -5px #0009;
 }
-header .album-cover > .img {
-    content: '';
+.album-cover + .title {user-select: none;}
+.album-cover > .img {
+    /* content: ''; */
     display: block;
     position: relative;
     top: 0;
@@ -169,6 +188,10 @@ header h1 {
 }
 .dark header h1 {
     background: linear-gradient(var(--dark-color-bitalpha), transparent);
+}
+header a.author {
+    color: inherit;
+    text-decoration: none;
 }
 #theme_toggle {
     position: absolute;
@@ -210,6 +233,7 @@ header .year-label {
 }
 
 /* MAIN CONTENT */
+.main-content {padding: 4em 1em 1em 1em;}
 .dark .main-content {text-shadow: var(--dark-txt-shadow) !important;}
 .light .main-content {text-shadow: var(--light-txt-shadow) !important;}
 
@@ -226,7 +250,6 @@ header .year-label {
 .light .main-content>#details a {
     filter: brightness(.5);
 }
-
 
 /* TRACKLIST */
 #tracklist {
@@ -262,19 +285,19 @@ header .year-label {
     display: flex;
 }
 .track >.play::before {
-        /* content: '\25ba'; */
-        content: '';
-        background: no-repeat url('play.png') center center;
-        background-size: contain;
-        width: .6em;
-        height: 1.3em;
-        padding: 0;
-        opacity: 0;
-        transition: all .5s;
-        margin-right: 0;
-        display: inline-block;
-        transform-origin: 50% 50%;
-    }
+    /* content: '\25ba'; */
+    content: '';
+    background: no-repeat url('play.png') center center;
+    background-size: contain;
+    width: .6em;
+    height: 1.3em;
+    padding: 0;
+    opacity: 0;
+    transition: opacity .5s;
+    margin-right: 0;
+    display: inline-block;
+    transform-origin: 50% 50%;
+}
 .dark .track >.play::before {filter: invert(1);}
 .light .track >.play::before {filter: invert(0);}
 

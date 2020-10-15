@@ -10,14 +10,16 @@
         <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
         <h1>{{ ALBUM.TITLE | safe }}</h1>
         <span class="album-cover"><span class="img" style="background-image: url('{{ ALBUM.COVER }}');"></span></span>
-        <p class="flex center">{{ ALBUM.AUTHOR | safe }} <span class="year-label">{{ ALBUM.YEAR | safe }}</span></p>
+        <a class="author" href="../">
+            <p class="flex center">{{ ALBUM.AUTHOR | safe }} <span class="year-label">{{ ALBUM.YEAR | safe }}</span></p>
+        </a>
     </header>
     
     <!-- tracklist and infos -->
     <section class="main-content flex">
         <ol id="tracklist" start="{{ ALBUM.FIRST_TRACK }}">{% for TRACK in ALBUM.TRACKLIST %}
             <li class="track btn-glass" data-audiosrc="{{ TRACK.PATH }}">
-                <span class="play">{{ TRACK.TITLE | safe }}</span>
+                <span class="title">{{ TRACK.TITLE | safe }}</span>
             </li>{% endfor %}
         </ol>
         <div id="details">
