@@ -1,22 +1,14 @@
 #!/usr/bin/env python3
 
-# from __future__ import (print_function, absolute_import, division, unicode_literals)
-# from builtins import (filter, open, str)  
-# from future import standard_library
-# standard_library.install_aliases()
-## up py3 compatibility => pip install future, below is valid py3
 import re, os, sys, json
 from jinja2 import Environment, select_autoescape, FileSystemLoader
 from flask import Flask, redirect, send_from_directory, request, flash, url_for #, session 
 from colorthief import ColorThief
 from requests import get
-# from flask_login import login_user, current_user, logout_user, login_required
-# import telegram
 
 ######## FLASK SERVER APP ##############
 app = Flask(__name__, static_url_path="/assets", static_folder='assets')
 # if __name__ == '__main__':
-    # app.run(host='127.0.0.1', port=5000) #localhost
     # app.run(host='192.168.1.9', port=5000) #scoglitti
     # app.run(host='192.168.1.137', port=5000) #comiso
 
@@ -74,7 +66,7 @@ def getList(author_name="ALL", verbose=False):
     #     print('aaaa')
     else:
         list = {'INFO':{}, 'ITEMS': []}
-        author_dir = f"{albums_dir}/{author}"
+        author_dir = f"{albums_dir}/{author_name}"
         if os.path.exists(author_dir):
             for filename in os.listdir(author_dir):
                 if filename.endswith('.json'):
@@ -91,7 +83,6 @@ def getList(author_name="ALL", verbose=False):
 # def getAllLists(verbose=False):
 #     """See getList"""
 
-
 def download(url, file_name):
     """File download"""
     with open(file_name, "wb") as file:
@@ -103,7 +94,6 @@ def getMainColor(image_path):
     color_thief = ColorThief(image_path)
     # palette = color_thief.get_palette(color_count=2)
     return color_thief.get_color(quality=1)
-
 
 ######## ROUTING
 @app.route("/")
@@ -120,7 +110,7 @@ def album(author, album):
     return env.get_template('album.html').render(TITLE=curr_album['TITLE'], ALBUM=curr_album, BLOCK='album')
 
 @app.route("/a/<author>/")
-def artist(author):
+def list(author):
     """Artist page"""
     curr_list = getList(author)
     return env.get_template('list.html').render(TITLE=author, AUTHOR=author, LIST=curr_list, BLOCK='list')
