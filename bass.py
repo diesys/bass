@@ -100,7 +100,7 @@ def getMainColor(image_path):
 def all(author="ALL"):
     """Homepage All albums"""
     # return url_for(artist("ALL"))
-    curr_list = getList(author  )
+    curr_list = getList(author)
     return env.get_template('list.html').render(TITLE=author, AUTHOR=author, LIST=curr_list, BLOCK='list')
 
 @app.route("/a/<author>/<album>/")
