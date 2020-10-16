@@ -73,7 +73,7 @@
 .flex.space-evenly {justify-content: space-evenly;}
 
 /* starting animation */
-html {background: #000 !important;}
+html {background: #000 !important; overflow-x: hidden !important;}
 header, footer {animation: var(--weak-fade-in);}
 
 body {
@@ -158,6 +158,7 @@ header.tilt-gradient::after {
     position: absolute;
     transition: var(--trans-a);
     pointer-events: none;
+    overflow-x: hidden !important;
     border-bottom: 4px solid #fff3;
 }
 .dark header.tilt-gradient::after {filter: brightness(.9) hue-rotate(8deg);}

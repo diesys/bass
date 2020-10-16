@@ -1,2 +1,5 @@
 audio/*
 *.pyc
+lib
+bin
+pyvenv.cfg
