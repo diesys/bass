@@ -3,14 +3,14 @@
 {% block album %}
 <body class="flex {% if ALBUM.THEME != 'light' %}dark{% else %}light{% endif %}">
     <!-- updates the css var theme color -->
-    <script>document.documentElement.style.setProperty('--theme-color', "{{ ALBUM.COLOR }}")</script>
+    <script>document.documentElement.style.setProperty('--theme-color', "{{ ALBUM.COLOR }}");</script>
     
     <!-- ui elements -->
     <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
     <a href="/" id="bass_logo"></a>
     
     <!-- album title, author and images -->
-    <header class="tilt-gradient flex column center justify-center" style="background-image: url('{{ ALBUM.BACKGROUND }}');">
+    <header class="on-stage flex column center justify-center" style="background-image: url('{{ ALBUM.BACKGROUND }}');">
         <h1>{{ ALBUM.TITLE | safe }}</h1>
         <span class="album-cover"><span class="img" style="background-image: url('{{ ALBUM.COVER }}');"></span></span>
         <a class="author" href="../">

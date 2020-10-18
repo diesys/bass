@@ -3,10 +3,12 @@
 {% block list %}
 <body class="flex {% if THEME != 'light' %}dark{% else %}light{% endif %}">
     <!-- updates the css var theme color -->
-    <!-- <script>document.documentElement.style.setProperty('--theme-color', "{#{ ALBUM.COLOR }#}")</script> -->
+{% if LIST.INFO.COLOR %}{{LIST.INFO.COLOR}}
+    <script>document.documentElement.style.setProperty('--theme-color', "{{ LIST.INFO.COLOR }}"</script>
+{% endif %}
     
     <!-- album title, author and images -->
-    <header class="tilt-gradient flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND | safe }}');">
+    <header class="flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND | safe }}');">
         <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
         <a href="/" id="bass_logo"></a>
         

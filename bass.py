@@ -35,15 +35,19 @@ def getAlbum(album_author, album_name, verbose=False):
             download(album['COVER'], download_path)
             # updates the new local url and the file
             album['COVER'] = '/'+download_path
+            album['COLOR'] = 'rgb' + str(getMainColor(download_path))
             json.dump(album, f)
+            f.close() #?????????????/
+        # else:
+        #     album['COLOR'] = 'rgb' + str(getMainColor(album['COVER'][1:]))
         return album
     return False
 
 ## DA FARE MOOOOLTO MEGLIO
 def getList(author_name="ALL", verbose=False):
     """Builds album list for the given author"""
+    list = {'INFO': {}, 'ITEMS': []}
     if author_name == "ALL":
-        list = {'INFO': {}, 'ITEMS': []}
         # if os.path.exists(author_dir):
     # try:
         for author in os.listdir(albums_dir):
@@ -65,7 +69,6 @@ def getList(author_name="ALL", verbose=False):
     # except:
     #     print('aaaa')
     else:
-        list = {'INFO':{}, 'ITEMS': []}
         author_dir = f"{albums_dir}/{author_name}"
         if os.path.exists(author_dir):
             for filename in os.listdir(author_dir):
@@ -75,9 +78,12 @@ def getList(author_name="ALL", verbose=False):
                     list['ITEMS'].append({
                         'TITLE': album['TITLE'],
                         'COVER': album['COVER'],
+                        'COLOR': album['COLOR'],
                         'URL': f"{filename.split('.')[0]}",
                     })
             list['INFO']['BACKGROUND'] = list['ITEMS'][-1]['COVER']
+            list['INFO']['COLOR'] = list['ITEMS'][-1]['COLOR']
+            print(list['ITEMS'][-1])
     return list
 
 # def getAllLists(verbose=False):
@@ -93,7 +99,7 @@ def getMainColor(image_path):
     """Gets predominant image color"""
     color_thief = ColorThief(image_path)
     # palette = color_thief.get_palette(color_count=2)
-    return color_thief.get_color(quality=1)
+    return color_thief.get_color(quality=100)
 
 ######## ROUTING
 @app.route("/")
