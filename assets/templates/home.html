@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block home %}
+<body class="flex {% if THEME != 'light' %}dark{% else %}light{% endif %}">
+    <!-- updates the css var theme color -->
+{% if COLOR %}
+    <script>document.documentElement.style.setProperty('--theme-color', '{{ COLOR }}');</script>
+{% endif %}
+    
+    <!--  -->
+    <header class="flex column center justify-center" style="background-image: url('assets/img/todaybg.jpg');">
+        <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
+        <a href="#" id="bass_logo"></a>
+        <h1>Welcome to BASS</h1>
+    </header>
+        
+    <!--  -->
+    <section class="main-content flex center space-evenly">
+            <p class="flex center">The Basic Audio Sharing Service, here you can find music with free or open lincences with some info and their original link. Feel free to add an album, a radio transmission, podcast, audio book and so on.</p>
+            <p class="flex center">DESCLAIMER: anyone is free to create a new collection entry with external links, the cover images will be downloaded and the website has no warranty, is served AS IT IS, we do not control for any violation and are responsabile for none of those eventual ones.</p>
+    </section>
+</body>
+
+{% endblock %}

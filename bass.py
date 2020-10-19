@@ -21,33 +21,38 @@ env = Environment(
 )
 #####################################################################################
 
-def getAlbum(album_author, album_name, verbose=False):
+# def getAlbum(album_author, album_name, verbose=False):
+def getAlbum(album_hash, verbose=False):
     """Album parser"""
-    audio_path = f"{albums_dir}/{album_author}/{album_name}.json"
-    if os.path.exists(audio_path):
-        f = open(audio_path, encoding="utf-8")
+    for entry in os.listdir(albums_dir):
+        print(entry, album_hash)
+        if re.search(album_hash, entry):
+            album_path = f"{albums_dir}/{entry}"
+    
+    if os.path.exists(album_path):
+        f = open(album_path, encoding="utf-8")
         album = json.load(f)
         # check if the image is a web or local url then downloads the image
         if (album['COVER'].split(':')[0] in 'https'):
-            f = open(audio_path, "w", encoding="utf-8")
+            f = open(album_path, "w", encoding="utf-8")
             # builds the download path and downloads the img e se non e' jpg??
-            download_path = f"{covers_dir}/{album_author}-{album['TITLE'].replace(' ','_')}.jpg"
+            download_path = f"{covers_dir}/{album_path.split('.json')[0]}.jpg"
             download(album['COVER'], download_path)
             # updates the new local url and the file
             album['COVER'] = '/'+download_path
             album['COLOR'] = 'rgb' + str(getMainColor(download_path))
             json.dump(album, f)
-            f.close() #?????????????/
+            f.close()
         # else:
         #     album['COLOR'] = 'rgb' + str(getMainColor(album['COVER'][1:]))
         return album
     return False
 
 ## DA FARE MOOOOLTO MEGLIO
-def getList(author_name="ALL", verbose=False):
+def getList(author_name="all", verbose=False):
     """Builds album list for the given author"""
     list = {'INFO': {}, 'ITEMS': []}
-    if author_name == "ALL":
+    if author_name == "all":
         # if os.path.exists(author_dir):
     # try:
         for author in os.listdir(albums_dir):
@@ -62,10 +67,7 @@ def getList(author_name="ALL", verbose=False):
                         'URL': f"a/{author}/{filename.split('.')[0]}",
                     })
         
-        # bing image of the day
-        response = get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=it-IT")
-        jsonResponse = response.json()
-        list['INFO']['BACKGROUND'] = f"https://bing.com{jsonResponse['images'][0]['url']}"
+        list['INFO']['BACKGROUND'] = todayBingBg()
     # except:
     #     print('aaaa')
     else:
@@ -86,8 +88,15 @@ def getList(author_name="ALL", verbose=False):
             print(list['ITEMS'][-1])
     return list
 
-# def getAllLists(verbose=False):
-#     """See getList"""
+def todayTheme():
+    response = get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=it-IT")
+    jsonResponse = response.json()
+    
+    theme = {}
+    theme['BING_URL'] = f"https://bing.com{jsonResponse['images'][0]['url']}"
+    download(theme['BING_URL'], 'assets/img/todaybg.jpg')
+    theme['COLOR'] = getMainColor('assets/img/todaybg.jpg')
+    return theme
 
 def download(url, file_name):
     """File download"""
@@ -101,29 +110,32 @@ def getMainColor(image_path):
     # palette = color_thief.get_palette(color_count=2)
     return color_thief.get_color(quality=100)
 
+
+## Today bing image and color
+today_theme = todayTheme()    
+
 ######## ROUTING
 @app.route("/")
-def all(author="ALL"):
-    """Homepage All albums"""
-    # return url_for(artist("ALL"))
-    curr_list = getList(author)
-    return env.get_template('list.html').render(TITLE=author, AUTHOR=author, LIST=curr_list, BLOCK='list')
+def home():
+    """Homepage"""
+    return env.get_template('home.html').render(TITLE="Welcome on BASS", COLOR=f"rgb{today_theme['COLOR']}", BLOCK='home')
 
-@app.route("/a/<author>/<album>/")
-def album(author, album):
-    """Album page"""
-    curr_album = getAlbum(author, album)
-    return env.get_template('album.html').render(TITLE=curr_album['TITLE'], ALBUM=curr_album, BLOCK='album')
-
-@app.route("/a/<author>/")
-def list(author):
-    """Artist page"""
-    curr_list = getList(author)
-    return env.get_template('list.html').render(TITLE=author, AUTHOR=author, LIST=curr_list, BLOCK='list')
+@app.route("/a/<id>/")
+def showAlbum(id):
+    """Album by ID page"""
+    album = getAlbum(id)
+    if album:
+        return env.get_template('album.html').render(ALBUM=album, BLOCK='album')
+    else:
+        return "Error, album not found"
 
 @app.route("/covers/<filename>")
 def covers(filename):
     """Serves downloaded covers file image"""
     return send_from_directory(app.root_path + "/covers/", filename)
 
-# @app.route("/covers/<path:filename>")
+# @app.route("/a/<author>/")
+# def list(author):
+#     """Artist page"""
+#     curr_list = getList(author)
+#     return env.get_template('list.html').render(TITLE=author, AUTHOR=author, LIST=curr_list, BLOCK='list')

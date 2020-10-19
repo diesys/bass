@@ -15,7 +15,9 @@
 
 <!-- loading block? -->
 
-{% if BLOCK == 'list' %}	
+{% if BLOCK == 'home' %}	
+    {% block home %}{% endblock %}
+{% elif BLOCK == 'list' %}	
     {% block list %}{% endblock %}
 {% elif BLOCK == 'album' %}
     {% block album %}{% endblock %}

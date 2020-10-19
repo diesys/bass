@@ -4,7 +4,7 @@
 <body class="flex {% if THEME != 'light' %}dark{% else %}light{% endif %}">
     <!-- updates the css var theme color -->
 {% if LIST.INFO.COLOR %}{{LIST.INFO.COLOR}}
-    <script>document.documentElement.style.setProperty('--theme-color', "{{ LIST.INFO.COLOR }}"</script>
+    <script>document.documentElement.style.setProperty('--theme-color', "{{ LIST.INFO.COLOR }}")</script>
 {% endif %}
     
     <!-- album title, author and images -->
@@ -20,7 +20,7 @@
     <section class="main-content flex center space-evenly rotateX">
         {% for ENTRY in LIST.ITEMS %}
             <span class="flex column center album-element">
-                <a class="btn-glass album-cover" href="{{ ENTRY.URL | safe }}"><span class="img" style="background-image: url('{{ ENTRY.COVER | safe }}');"></span></a>
+                <a class="btn-glass album-cover" href="/{{ ENTRY.URL | safe }}"><span class="img" style="background-image: url('{{ ENTRY.COVER | safe }}');"></span></a>
                 <span class="title">{{ ENTRY.TITLE | safe }}</span>
             </span>
         {% endfor %}

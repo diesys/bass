@@ -1,3 +1,17 @@
+BASS = Basic Audio Sharing Service
+
+- chiedere a nu di fare db?
+- vedere video tutorial flask forms?
+- come gestire nomi duplicati? serve un ID album e gruppo. Hash come id così si mette nell'url
+- usare url_for per i link così è più facile gestire i link e sta tutto nella homepage e usa solo le get
+- usare post in homepage solo per seleziona album recenti, creare nuovi, vedere tutti (lady load in futuro)
+- socket.io per caricare il contenuto e usare il player fisso
+- cercare meglio js player audio, nel caso howlerjs
+- animate js cercare meglio librerie per animazioni e alleggerire CSS?
+
+- fare form di submit di un nuovo album coi link, url copertina (o upload con limite), url background (o upload con limite) no upload canzoni
+- form per possibilita' di modifica? come? con un url generato?
+
 - fare loading animation con i due colori (o solo uno e il suo invert? meglio) con due ce
 - read more con i dettagli sopra o sotto la tracklist
 - fare versione in flask / electron?
@@ -5,17 +19,16 @@
 - https://rapidapi.com/theaudiodb/api/theaudiodb
 - https://www.theaudiodb.com/
 
-- versione album covers con la cover con un before radial gradient a fare effetto luce in alto
-
 - fare header con titolo e copertina in alto che appare dopo aver superato la copertina?
 
-
 - mettere immagini ui (play e giornonotte) come base64, così Luke può usare il raw di gitlab come cdn
-
 - spazio per i credits in basso
+- home view: space evenly e centered flex cover art e modalità lista (tramite solo classi css) così le transizioni sono fluide (altrimenti se va lento al click mettere online transition none o animazione appari/scompari. Usare stessi elementi cambiare dimensioni e Flex. Per lista usare i btn-glsss già presenti
+- c'e' un modo in cui si puo' rendere meglio questo cambio di link? animazione all'apparizione della finestra?
 
+####### DONE
 - fare homepage
 - homepage: usare list temp ma con immagine diversa e colore random da py e che la lista cerca gli artisti (va fatta eccezione?)
-- home view: space evenly e centered flex cover art e modalità lista (tramite solo classi css) così le transizioni sono fluide (altrimenti se va lento al click mettere online transition none o animazione appari/scompari. Usare stessi elementi cambiare dimensioni e Flex. Per lista usare i btn-glsss già presenti
 
-- c'e' un modo in cui si puo' rendere meglio questo cambio di link? animazione all'apparizione della finestra?
+
+
