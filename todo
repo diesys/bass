@@ -1,5 +1,7 @@
 BASS = Basic Audio Sharing Service
 
+- abilita disabilita funzione in homepage (possibilita di sfogliare o creare separate, NON SOLO NEL il template anche conf nel main)
+
 - chiedere a nu di fare db?
 - vedere video tutorial flask forms?
 - come gestire nomi duplicati? serve un ID album e gruppo. Hash come id così si mette nell'url
