@@ -26,7 +26,7 @@ def getAlbum(album_hash, verbose=False):
     """Album parser"""
     album_path = ''
     for entry in os.listdir(albums_dir):
-        if album_hash in entry:
+        if f"_{album_hash}.json" in entry:
             album_filename = entry
             album_path = f"{albums_dir}/{album_filename}"
     
@@ -141,6 +141,10 @@ def getMainColor(image_path, verbose=False):
         print(f"Main color: '{image_path}' is '{main_color}'")
     return main_color
 
+def renderErrPage(error):
+    """Error pages template renderer"""
+    return env.get_template('error.html').render(ERROR=error,TITLE="ERROR", COLOR=today_theme['COLOR'], BLOCK='error')
+
 
 ## Today bing image and color
 today_theme = todayTheme()    
@@ -158,7 +162,7 @@ def showAlbum(id):
     if album:
         return env.get_template('album.html').render(TITLE=f"{album['TITLE']} ({album['AUTHOR']})", ALBUM=album, BLOCK='album')
     else:
-        return "Error, album not found"
+        return renderErrPage("Album not found")
 
 @app.route("/covers/<filename>")
 def covers(filename):
@@ -172,6 +176,4 @@ def allAlbums():
     if all_albums:
         return env.get_template('list.html').render(TITLE="All albums", COLOR=today_theme['COLOR'], AUTHOR="All albums", LIST=all_albums, BLOCK='list')
     else:
-        return "Error, something happened while loading albums"
-
-# creare errorpage come return in caso di errore coi messaggi personalizzati nel template html errors.html
+        return renderErrPage("Something happened while loading albums")

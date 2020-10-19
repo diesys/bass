@@ -262,15 +262,20 @@ header.on-stage a.author {
 }
 #bass_logo {
     left: .4em;
+}
+.bass_logo {
     background-image: url('../img/logo_bass.png');
     width: 6em;
     min-height: 4em;
     filter: invert(1);
     opacity: .7;
     transition: opacity .4s;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
-#bass_logo:hover {opacity: 1;}
-.light #bass_logo {filter: invert(0)}
+.bass_logo:hover {opacity: 1;}
+.light .bass_logo {filter: invert(0)}
 #theme_toggle {
     background-image: url('sunmoon.png');
     width: 3.2em;
