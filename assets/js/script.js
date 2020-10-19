@@ -21,6 +21,28 @@ function toggleTheme(theme='none') {
     else {  // default option is just a toggle between dark/light
         document.querySelector('body').classList.toggle('dark');
         document.querySelector('body').classList.toggle('light');
+        theme = document.querySelector('body').classList.contains('dark') ? 'dark' : 'light';
+    }
+    updateThemeHrefs(theme);
+}
+
+function updateTheme() {
+    // gets the https://bass.link?theme {dark/light}
+    if(window.location.search != '') {
+        theme = window.location.search.split('?')[1].trim();
+        toggleTheme(theme);
+    } else {
+        theme = 'dark';
+    }
+    updateThemeHrefs(theme)
+}
+
+function updateThemeHrefs(theme='dark') {
+    // appends to all ".internal" links to
+    if(theme == 'dark' | theme == 'light') {
+        document.querySelectorAll('a.internal').forEach(element => {
+            element.href = element.href.split('?')[0] + "?" + theme
+        })
     }
 }
 

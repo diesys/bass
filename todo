@@ -1,3 +1,14 @@
+res:
+- http://192.168.1.9:5000/
+- https://mikebarkas.dev/2016/set-environment-variables-activating-virtualenv/
+- https://stackoverflow.com/questions/14684968/how-to-export-virtualenv
+
+- http://zetcode.com/python/jinja/
+- https://github.com/miguelgrinberg/Flask-SocketIO
+- https://stackoverflow.com/questions/42226897/loading-a-webpage-into-iframe-flask
+
+TODO:
+
 BASS = Basic Audio Sharing Service
 
 - abilita disabilita funzione in homepage (possibilita di sfogliare o creare separate, NON SOLO NEL il template anche conf nel main)

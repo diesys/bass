@@ -1,23 +1,20 @@
 {% extends "base.html" %}
 
 {% block error %}
-<!-- <body class="flex {% if THEME != 'light' %}dark{% else %}light{% endif %}"> -->
-<body class="flex dark">
+<body class="flex dark">{% if COLOR %}
     <!-- updates the css var theme color -->
-{% if COLOR %}
-    <script>document.documentElement.style.setProperty('--theme-color', '{{ COLOR }}');</script>
-{% endif %}
+    <script>document.documentElement.style.setProperty('--theme-color', '{{ COLOR }}');</script>{% endif %}
     
     <header class="flex column center justify-center" style="background-image: url('/assets/img/todaybg.jpg');">
-        <h1><a href="/" class="bass_logo"></a></h1>
+        <h1><a href="/" class="bass_logo internal"></a></h1>
     </header>
     
     <section class="main-content flex column center">
         <p class="flex center">Oops... an error occurred while processing your request!</p>
         <p class="flex center"><b>{{ ERROR }}</b></p>
         <p class="flex center space-evenly">
-            <a class="button" href="/">Go back home..</a>
-            <a class="button" href="mailto:ci@o.iac">Contact us</a>
+            <a class="button internal" href="/">Go back home..</a>
+            <a class="button internal" href="mailto:ci@o.iac">Contact us</a>
         </p>
     </section>
 </body>

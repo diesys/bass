@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block album %}
-<body class="flex {% if ALBUM.THEME != 'light' %}dark{% else %}light{% endif %}">
+<body class="flex dark">{% if ALBUM.COLOR %}
     <!-- updates the css var theme color -->
-    <script>document.documentElement.style.setProperty('--theme-color', "{{ ALBUM.COLOR }}");</script>
+    <script>document.documentElement.style.setProperty('--theme-color', '{{ ALBUM.COLOR }}');</script>{% endif %}
     
     <!-- ui elements -->
     <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
-    <a href="/" id="bass_logo" class="bass_logo"></a>
+    <a href="/" id="bass_logo" class="bass_logo internal"></a>
     
     <!-- album title, author and images -->
     <header class="on-stage flex column center justify-center" style="background-image: url('{{ ALBUM.BACKGROUND }}');">
