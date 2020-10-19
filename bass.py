@@ -98,12 +98,17 @@ def getListAll(verbose=False):
         if filename.endswith('.json'):
             f = open(f"{albums_dir}/{filename}", encoding="utf-8")
             album = json.load(f)
-            list['ITEMS'].append({
-                'TITLE': album['TITLE'],
-                'COVER': album['COVER'],
-                # sarebbe meglio usare qui url_for nel template? con l'id?
-                'URL': f"a/{filename.split('.')[0].split('_')[-1]}",
-            })
+            try:
+                if(album['IN_HOMEPAGE'] != "False"):
+                    list['ITEMS'].append({
+                        'TITLE': album['TITLE'],
+                        'COVER': album['COVER'],
+                        # sarebbe meglio usare qui url_for nel template? con l'id?
+                        'URL': f"a/{filename.split('.')[0].split('_')[-1]}",
+                    })
+            except KeyError:
+                pass
+
     list['INFO']['BACKGROUND'] = '/assets/img/todaybg.jpg'
     if(verbose):
         print(f"All albums: {list}")
@@ -163,5 +168,10 @@ def covers(filename):
 @app.route("/albums/")
 def allAlbums():
     """All albums"""
-    curr_list = getListAll()
-    return env.get_template('list.html').render(TITLE="All albums", COLOR=today_theme['COLOR'], AUTHOR="All albums", LIST=curr_list, BLOCK='list')
+    all_albums = getListAll()
+    if all_albums:
+        return env.get_template('list.html').render(TITLE="All albums", COLOR=today_theme['COLOR'], AUTHOR="All albums", LIST=all_albums, BLOCK='list')
+    else:
+        return "Error, something happened while loading albums"
+
+# creare errorpage come return in caso di errore coi messaggi personalizzati nel template html errors.html

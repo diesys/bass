@@ -2,6 +2,8 @@
     "THEME": "dark",
     "COLOR": "#e48b1e",
     "FIRST_TRACK": 1,
+    "IN_HOMEPAGE": "True",
+    "ID": "123456789",
     "AUTHOR": "Monplaisir",
     "TITLE": "American Dreams",
     "YEAR": 2009,
