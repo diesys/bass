@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import re, os, sys, json
+import os, sys, json #, re
 from jinja2 import Environment, select_autoescape, FileSystemLoader
 from flask import Flask, redirect, send_from_directory, request, flash, url_for #, session 
 from colorthief import ColorThief
