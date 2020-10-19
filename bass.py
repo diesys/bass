@@ -24,27 +24,30 @@ env = Environment(
 # def getAlbum(album_author, album_name, verbose=False):
 def getAlbum(album_hash, verbose=False):
     """Album parser"""
+    album_path = ''
     for entry in os.listdir(albums_dir):
-        print(entry, album_hash)
-        if re.search(album_hash, entry):
-            album_path = f"{albums_dir}/{entry}"
+        if album_hash in entry:
+            album_filename = entry
+            album_path = f"{albums_dir}/{album_filename}"
     
-    if os.path.exists(album_path):
+    if (album_path !='') and os.path.exists(album_path):
         f = open(album_path, encoding="utf-8")
         album = json.load(f)
         # check if the image is a web or local url then downloads the image
         if (album['COVER'].split(':')[0] in 'https'):
             f = open(album_path, "w", encoding="utf-8")
             # builds the download path and downloads the img e se non e' jpg??
-            download_path = f"{covers_dir}/{album_path.split('.json')[0]}.jpg"
+            download_path = f"{covers_dir}/{album_filename.split('.json')[0]}.jpg"
             download(album['COVER'], download_path)
             # updates the new local url and the file
             album['COVER'] = '/'+download_path
             album['COLOR'] = 'rgb' + str(getMainColor(download_path))
             json.dump(album, f)
             f.close()
-        # else:
-        #     album['COLOR'] = 'rgb' + str(getMainColor(album['COVER'][1:]))
+        else:
+            album['COLOR'] = 'rgb' + str(getMainColor(album['COVER'][1:]))
+        
+        print(album['TITLE'])
         return album
     return False
 
@@ -67,7 +70,7 @@ def getList(author_name="all", verbose=False):
                         'URL': f"a/{author}/{filename.split('.')[0]}",
                     })
         
-        list['INFO']['BACKGROUND'] = todayBingBg()
+        list['INFO']['BACKGROUND'] = today_theme['BING_URL']
     # except:
     #     print('aaaa')
     else:
@@ -86,6 +89,22 @@ def getList(author_name="all", verbose=False):
             list['INFO']['BACKGROUND'] = list['ITEMS'][-1]['COVER']
             list['INFO']['COLOR'] = list['ITEMS'][-1]['COLOR']
             print(list['ITEMS'][-1])
+    return list
+
+def getListAll(verbose=False):
+    """Builds all album list"""
+    list = {'INFO': {}, 'ITEMS': []}
+    for filename in os.listdir(albums_dir):
+        if filename.endswith('.json'):
+            f = open(f"{albums_dir}/{filename}", encoding="utf-8")
+            album = json.load(f)
+            list['ITEMS'].append({
+                'TITLE': album['TITLE'],
+                'COVER': album['COVER'],
+                # sarebbe meglio usare qui url_for nel template? con l'id?
+                'URL': f"a/{filename.split('.')[0].split('_')[-1]}",
+            })
+    list['INFO']['BACKGROUND'] = '/assets/img/todaybg.jpg'
     return list
 
 def todayTheme():
@@ -134,8 +153,8 @@ def covers(filename):
     """Serves downloaded covers file image"""
     return send_from_directory(app.root_path + "/covers/", filename)
 
-# @app.route("/a/<author>/")
-# def list(author):
-#     """Artist page"""
-#     curr_list = getList(author)
-#     return env.get_template('list.html').render(TITLE=author, AUTHOR=author, LIST=curr_list, BLOCK='list')
+@app.route("/albums/")
+def allAlbums():
+    """All albums"""
+    curr_list = getListAll()
+    return env.get_template('list.html').render(TITLE="All albums", AUTHOR="All albums", LIST=curr_list, BLOCK='list')

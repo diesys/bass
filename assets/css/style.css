@@ -77,7 +77,7 @@
 
 /* starting animation */
 html {background: #000 !important; overflow-x: hidden !important;}
-header, footer {animation: var(--weak-fade-in);}
+header, footer, #footer {animation: var(--weak-fade-in);}
 
 body {
     margin: 0;

@@ -3,7 +3,7 @@
 {% block list %}
 <body class="flex {% if THEME != 'light' %}dark{% else %}light{% endif %}">
     <!-- updates the css var theme color -->
-{% if LIST.INFO.COLOR %}{{LIST.INFO.COLOR}}
+{% if LIST.INFO.COLOR %}
     <script>document.documentElement.style.setProperty('--theme-color', "{{ LIST.INFO.COLOR }}")</script>
 {% endif %}
     
