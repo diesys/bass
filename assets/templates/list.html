@@ -5,6 +5,8 @@
     <!-- updates the css var theme color -->
 {% if LIST.INFO.COLOR %}
     <script>document.documentElement.style.setProperty('--theme-color', "{{ LIST.INFO.COLOR }}")</script>
+{% elif COLOR %}
+    <script>document.documentElement.style.setProperty('--theme-color', "{{ COLOR }}")</script>
 {% endif %}
     
     <!-- album title, author and images -->

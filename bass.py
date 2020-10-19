@@ -41,13 +41,15 @@ def getAlbum(album_hash, verbose=False):
             download(album['COVER'], download_path)
             # updates the new local url and the file
             album['COVER'] = '/'+download_path
-            album['COLOR'] = 'rgb' + str(getMainColor(download_path))
+            album['COLOR'] = getMainColor(download_path)
             json.dump(album, f)
             f.close()
         else:
-            album['COLOR'] = 'rgb' + str(getMainColor(album['COVER'][1:]))
+            # removes "/" for relative positioning
+            album['COLOR'] = getMainColor(album['COVER'][1:])
         
-        print(album['TITLE'])
+        if(verbose):
+            print(f"Selected album: {album}")
         return album
     return False
 
@@ -56,8 +58,6 @@ def getList(author_name="all", verbose=False):
     """Builds album list for the given author"""
     list = {'INFO': {}, 'ITEMS': []}
     if author_name == "all":
-        # if os.path.exists(author_dir):
-    # try:
         for author in os.listdir(albums_dir):
             author_dir = f"{albums_dir}/{author}"
             for filename in os.listdir(author_dir):
@@ -71,8 +71,6 @@ def getList(author_name="all", verbose=False):
                     })
         
         list['INFO']['BACKGROUND'] = today_theme['BING_URL']
-    # except:
-    #     print('aaaa')
     else:
         author_dir = f"{albums_dir}/{author_name}"
         if os.path.exists(author_dir):
@@ -89,6 +87,8 @@ def getList(author_name="all", verbose=False):
             list['INFO']['BACKGROUND'] = list['ITEMS'][-1]['COVER']
             list['INFO']['COLOR'] = list['ITEMS'][-1]['COLOR']
             print(list['ITEMS'][-1])
+    if(verbose):
+        print(f"Selected list: {list}")
     return list
 
 def getListAll(verbose=False):
@@ -105,29 +105,36 @@ def getListAll(verbose=False):
                 'URL': f"a/{filename.split('.')[0].split('_')[-1]}",
             })
     list['INFO']['BACKGROUND'] = '/assets/img/todaybg.jpg'
+    if(verbose):
+        print(f"All albums: {list}")
     return list
 
-def todayTheme():
+def todayTheme(verbose=False):
     response = get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=it-IT")
     jsonResponse = response.json()
-    
-    theme = {}
-    theme['BING_URL'] = f"https://bing.com{jsonResponse['images'][0]['url']}"
+    theme = {'BING_URL': f"https://bing.com{jsonResponse['images'][0]['url']}"}
     download(theme['BING_URL'], 'assets/img/todaybg.jpg')
     theme['COLOR'] = getMainColor('assets/img/todaybg.jpg')
+    if(verbose):
+        print(f"Today's bing theme is: {theme}")
     return theme
 
-def download(url, file_name):
+def download(url, file_name, verbose=False):
     """File download"""
     with open(file_name, "wb") as file:
         response = get(url)
         file.write(response.content)
+    if(verbose):
+        print(f"Downloading: '{url}' to '{file_name}'")
 
-def getMainColor(image_path):
+def getMainColor(image_path, verbose=False):
     """Gets predominant image color"""
     color_thief = ColorThief(image_path)
+    main_color = f"rgb{color_thief.get_color(quality=100)}"
     # palette = color_thief.get_palette(color_count=2)
-    return color_thief.get_color(quality=100)
+    if(verbose):
+        print(f"Main color: '{image_path}' is '{main_color}'")
+    return main_color
 
 
 ## Today bing image and color
@@ -137,7 +144,7 @@ today_theme = todayTheme()
 @app.route("/")
 def home():
     """Homepage"""
-    return env.get_template('home.html').render(TITLE="Welcome on BASS", COLOR=f"rgb{today_theme['COLOR']}", BLOCK='home')
+    return env.get_template('home.html').render(TITLE="Welcome on BASS", COLOR=today_theme['COLOR'], BLOCK='home')
 
 @app.route("/a/<id>/")
 def showAlbum(id):
@@ -157,4 +164,4 @@ def covers(filename):
 def allAlbums():
     """All albums"""
     curr_list = getListAll()
-    return env.get_template('list.html').render(TITLE="All albums", AUTHOR="All albums", LIST=curr_list, BLOCK='list')
+    return env.get_template('list.html').render(TITLE="All albums", COLOR=today_theme['COLOR'], AUTHOR="All albums", LIST=curr_list, BLOCK='list')
