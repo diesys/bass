@@ -11,9 +11,7 @@
     <header class="flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND | safe }}');">
         <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
         <a href="/" id="bass_logo"></a>
-        
         <h1>{{ AUTHOR | safe }}</h1>
-        <!-- <p class="flex center">{#{ ALBUM.AUTHOR | safe }#} <span class="year-label">{#{ ALBUM.YEAR | safe }#}</span></p> -->
     </header>
     
     <!-- tracklist and infos / 'alternate' class gives alternate odd/even perspective for album covers -->
@@ -25,12 +23,6 @@
             </span>
         {% endfor %}
     </section>
-    
-    <!-- player -->
-    <!-- <footer id="player" class="flex center space-evenly">
-        <span id="now_playing">No track</span>
-        <audio src="#" controls="controls"></audio>
-    </footer> -->
 </body>
 
 {% endblock %}

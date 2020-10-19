@@ -144,7 +144,7 @@ def showAlbum(id):
     """Album by ID page"""
     album = getAlbum(id)
     if album:
-        return env.get_template('album.html').render(ALBUM=album, BLOCK='album')
+        return env.get_template('album.html').render(TITLE=f"{album['TITLE']} ({album['AUTHOR']})", ALBUM=album, BLOCK='album')
     else:
         return "Error, album not found"
 
