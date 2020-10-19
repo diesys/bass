@@ -143,7 +143,7 @@ def getMainColor(image_path, verbose=False):
 
 def renderErrPage(error):
     """Error pages template renderer"""
-    return env.get_template('error.html').render(ERROR=error,TITLE="ERROR", COLOR=today_theme['COLOR'], BLOCK='error')
+    return env.get_template('error.html').render(ERROR=error,TITLE=error, COLOR=today_theme['COLOR'], BLOCK='error')
 
 
 ## Today bing image and color
