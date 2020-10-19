@@ -42,7 +42,6 @@
 .dark ::selection {background: var(--dark-color);}
 .light ::selection {background: var(--light-color);}
 
-
 @keyframes fade-in {
     0% {opacity: 0;} 
     100% {opacity: 1;}
@@ -74,6 +73,7 @@
 .flex.center {align-items: center;}
 .flex.justify-center {justify-content: center;}
 .flex.space-evenly {justify-content: space-evenly;}
+.small {font-size: .8em;}
 
 /* starting animation */
 html {background: #000 !important; overflow-x: hidden !important;}
