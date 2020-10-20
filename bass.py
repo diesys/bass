@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import os, sys, json #, re
+import os, sys, json, string, random #, re
 from jinja2 import Environment, select_autoescape, FileSystemLoader
 from flask import Flask, redirect, send_from_directory, request, flash, url_for #, session 
 from colorthief import ColorThief
@@ -145,6 +145,9 @@ def renderErrPage(error):
     """Error pages template renderer"""
     return env.get_template('error.html').render(ERROR=error,TITLE=error, COLOR=today_theme['COLOR'], BLOCK='error')
 
+def get_random_string(length):
+    letters = string.ascii_letters + string.digits
+    return ''.join(random.choice(letters) for i in range(length))
 
 ## Today bing image and color
 today_theme = todayTheme()    
@@ -154,6 +157,11 @@ today_theme = todayTheme()
 def home():
     """Homepage"""
     return env.get_template('home.html').render(TITLE="Welcome on BASS", COLOR=today_theme['COLOR'], BLOCK='home')
+
+@app.route("/add")
+def newAlbum():
+    """Create new album"""
+    return env.get_template('new_album.html').render(TITLE="New album", COLOR=today_theme['COLOR'], BLOCK='new_album', NEW_HASH=get_random_string(9))
 
 @app.route("/a/<id>/")
 def showAlbum(id):

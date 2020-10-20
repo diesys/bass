@@ -12,10 +12,11 @@
     <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
     <script src="/assets/js/script.min.js" defer="defer"></script>
 </head>
-{% if BLOCK == 'home' %}    {% block home %}{% endblock %}
-{% elif BLOCK == 'list' %}	{% block list %}{% endblock %}
-{% elif BLOCK == 'album' %} {% block album %}{% endblock %}
-{% elif BLOCK == 'error' %} {% block error %}{% endblock %}
+{% if BLOCK == 'home' %}        {% block home %}{% endblock %}
+{% elif BLOCK == 'list' %}	    {% block list %}{% endblock %}
+{% elif BLOCK == 'album' %}     {% block album %}{% endblock %}
+{% elif BLOCK == 'error' %}     {% block error %}{% endblock %}
+{% elif BLOCK == 'new_album' %} {% block new_album %}{% endblock %}
 {% endif %}
 <!-- loading block? -->
 <script>window.addEventListener("load", function() {updateTheme();});</script>

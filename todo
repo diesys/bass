@@ -1,11 +1,13 @@
 res:
-- http://192.168.1.9:5000/
+* https://www.techiediaries.com/flask-electron-tutorial/
 - https://mikebarkas.dev/2016/set-environment-variables-activating-virtualenv/
 - https://stackoverflow.com/questions/14684968/how-to-export-virtualenv
 
 - http://zetcode.com/python/jinja/
 - https://github.com/miguelgrinberg/Flask-SocketIO
 - https://stackoverflow.com/questions/42226897/loading-a-webpage-into-iframe-flask
+
+pip freeze / per dipendenze (dentro virtualenv)
 
 TODO:
 

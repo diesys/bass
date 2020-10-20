@@ -73,7 +73,9 @@
 .flex.center {align-items: center;}
 .flex.justify-center {justify-content: center;}
 .flex.space-evenly {justify-content: space-evenly;}
-.small {font-size: .8em;}
+.flex.justify-end {justify-content: flex-end;}
+.flex.align-end {align-items: flex-end;}
+.txt-center {text-align: center;}
 
 /* starting animation */
 html {background: #000 !important; overflow-x: hidden !important;}
@@ -117,12 +119,28 @@ a {
     color: var(--theme-color);
     filter: brightness(1.5);
 }
+.button {
+    background: var(--theme-color);
+    border-radius: .5em;
+    padding: .5em;
+    text-shadow: none !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: var(--light-box-shadow);
+}
+.light .button {color: #fffa;}
+.dark .button {color: #000a;}
+
 .big {
     font-size: 2em; 
     font-weight: 100;
     line-height: .5em;
     display: inline;
 }
+.small {font-size: .8em;}
 
 /* HEADER */
 header {
@@ -387,6 +405,32 @@ header .year-label {
     margin-right: .6em;
     opacity: 1;
     width: 2em;
+}
+
+/* NEW ALBUM FORM */
+form input,
+form select,
+form textarea {
+    margin: 1em 2em;
+    padding: .5em;
+    border-radius: .5em;
+    border: none !important;
+    box-shadow: var(--dark-box-shadow);
+    align-self: center;
+    width: auto;
+}
+fieldset {
+    margin: 2em;
+    border-radius: 1em;
+    box-shadow: var(--light-box-shadow);
+    border: 0;
+    padding: 1.5em 1.2em;
+}
+.disclaimer > p {
+    margin: 0 !important;
+}
+.disclaimer input {
+    margin: 1em !important;
 }
 
 /* PLAYER */
