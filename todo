@@ -7,6 +7,11 @@ res:
 - https://github.com/miguelgrinberg/Flask-SocketIO
 - https://stackoverflow.com/questions/42226897/loading-a-webpage-into-iframe-flask
 
+- https://stackoverflow.com/questions/14684968/how-to-export-virtualenv
+- https://stackoverflow.com/questions/52449602/how-to-set-environment-variables-in-virtualenv
+- https://www.techiediaries.com/flask-electron-tutorial/
+- https://github.com/joetats/youtube_search (mettere select nella ricerca se youtube o local)
+
 pip freeze / per dipendenze (dentro virtualenv)
 
 TODO:
