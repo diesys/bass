@@ -50,44 +50,7 @@ def getAlbum(album_hash, verbose=False):
     return False
 
 ## DA FARE MOOOOLTO MEGLIO ((((((((((((((((((((((((((()))))))))))))))))))))))))))
-def getList(author_name="all", verbose=False):
-    """Builds album list for the given author"""
-    list = {'INFO': {}, 'ITEMS': []}
-    if author_name == "all":
-        for author in os.listdir(albums_dir):
-            author_dir = f"{albums_dir}/{author}"
-            for filename in os.listdir(author_dir):
-                if filename.endswith('.json'):
-                    f = open(f"{author_dir}/{filename}", encoding="utf-8")
-                    album = json.load(f)
-                    list['ITEMS'].append({
-                        'TITLE': album['TITLE'],
-                        'COVER': album['COVER'],
-                        'URL': f"a/{author}/{filename.split('.')[0]}",
-                    })
-        
-        list['INFO']['BACKGROUND'] = today_theme['BING_URL']
-    else:
-        author_dir = f"{albums_dir}/{author_name}"
-        if os.path.exists(author_dir):
-            for filename in os.listdir(author_dir):
-                if filename.endswith('.json'):
-                    f = open(f"{author_dir}/{filename}", encoding="utf-8")
-                    album = json.load(f)
-                    list['ITEMS'].append({
-                        'TITLE': album['TITLE'],
-                        'COVER': album['COVER'],
-                        'COLOR': album['COLOR'],
-                        'URL': f"{filename.split('.')[0]}",
-                    })
-            list['INFO']['BACKGROUND'] = list['ITEMS'][-1]['COVER']
-            list['INFO']['COLOR'] = list['ITEMS'][-1]['COLOR']
-            print(list['ITEMS'][-1])
-    if(verbose):
-        print(f"Selected list: {list}")
-    return list
-
-def getListAll(tracklist=os.listdir(albums_dir), verbose=False):
+def getList(tracklist=os.listdir(albums_dir), verbose=False):
     """Builds all album list"""
     new_list = {'INFO': {}, 'ITEMS': []}
     for filename in tracklist:
@@ -95,7 +58,7 @@ def getListAll(tracklist=os.listdir(albums_dir), verbose=False):
             f = open(f"{albums_dir}/{filename}", encoding="utf-8")
             album = json.load(f)
             try:
-                if(album['IN_HOMEPAGE'] != "False"):
+                if(album['FINDABLE'] != "False"):
                     new_list['ITEMS'].append({
                         'TITLE': album['TITLE'],
                         'COVER': album['COVER'],
@@ -170,9 +133,9 @@ def home():
 @app.route("/search", methods=['POST'])
 def search():
     """Search page"""
-    result = searchAudio(request.form['search'])
-    result_list = getListAll(result)
-    return env.get_template('list.html').render(TITLE=f"'{request.form['search']}' search result", COLOR=today_theme['COLOR'], AUTHOR="", LIST=result_list, BLOCK='list')
+    result_list = getList(searchAudio(request.form['search']))
+    title = f"'{request.form['search']}' search result"
+    return env.get_template('list.html').render(TITLE=title, COLOR=today_theme['COLOR'], AUTHOR=title, LIST=result_list, BLOCK='list')
 
 @app.route("/add-album")
 def addAlbum():
@@ -202,7 +165,7 @@ def covers(filename):
 @app.route("/albums/")
 def allAlbums():
     """All albums"""
-    all_albums = getListAll()
+    all_albums = getList()
     if all_albums:
         return env.get_template('list.html').render(TITLE="All albums", COLOR=today_theme['COLOR'], AUTHOR="All albums", LIST=all_albums, BLOCK='list')
     else:
