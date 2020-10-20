@@ -170,11 +170,13 @@ def addAlbum():
     """Create new album"""
     return env.get_template('add_album.html').render(TITLE="Add album", COLOR=today_theme['COLOR'], BLOCK='add_album', NEW_HASH=newID())
 
-@app.route("/add-tracks")
+@app.route("/add-tracks", methods=["POST", "GET"])
 def addTracks():
     """Add tracks to the new album"""
     album = request.form
-    return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", COLOR=today_theme['COLOR'], BLOCK='add_tracks')
+    return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", ALBUM=album, LENGHT=int(album['LENGHT']), COLOR=today_theme['COLOR'], BLOCK='add_tracks')
+
+    # return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", COLOR=today_theme['COLOR'], BLOCK='add_tracks')
 
 @app.route("/a/<id>/")
 def showAlbum(id):

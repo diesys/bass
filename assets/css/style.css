@@ -130,6 +130,7 @@ a {
     font-size: 1em;
     font-weight: bold;
     box-shadow: var(--light-box-shadow);
+    margin: 1em;
 }
 .light .button {color: #fffa;}
 .dark .button {color: #000a;}

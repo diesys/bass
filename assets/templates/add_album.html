@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block new_album %}
-<!-- <body class="flex {#% if THEME != 'light' %}dark{% else %}light{% endif %#}"> -->
+{% block add_album %}
 <body class="flex dark">{% if COLOR %}
     <!-- updates the css var theme color -->
     <script>document.documentElement.style.setProperty('--theme-color', '{{ COLOR }}');</script>{% endif %}
@@ -16,10 +15,8 @@
         <p>Fill the form below with attention, you WON'T be able to edit once submitted.</p>
         <form action="/add-tracks" method="POST" id="post_new">
             <fieldset class="flex center space-evenly">
-                <!-- <span class="flex center"> -->
-                    <!-- <label for="ID">ID</label> -->
-                    <input type="text" name="ID" id="ID" value="{{ NEW_HASH }}" hidden required>
-                <!-- </span> -->
+                <input type="text" name="ID" id="ID" value="{{ NEW_HASH }}" hidden required>
+                
                 <span class="flex center"><label for="AUTHOR">Author</label>
                     <input type="text" name="AUTHOR" id="AUTHOR" placeholder="Add author" required>
                 </span>
@@ -34,6 +31,9 @@
                 </span>
                 <span class="flex center"><label for="BACKGROUND">Page background</label>
                     <input type="text" name="BACKGROUND" id="BACKGROUND" placeholder="Add background URL" required>
+                </span>
+                <span class="flex center"><label for="LENGHT">Tracklist lenght</label>
+                    <input type="number" name="LENGHT" id="LENGHT" value="0" min="1" max="100" required>
                 </span>
             </fieldset>
             
@@ -66,7 +66,7 @@
             <h3><u>WARNING</u></h3>
             <p>You CANNOT edit this album later and the cover image will be downloaded.</p>
             <p>The BASS website has no responsability for any copyright violation.</p>
-            <input class="button" formmethod="POST" form="post_new" type="submit" name="submit" value="Create *">
+            <input class="button" formmethod="POST" form="post_new" type="submit" name="submit" value="Next *">
             <p class="small">* By clicking the submit button you agree with the terms just above.</p>
         </div>
     </section>

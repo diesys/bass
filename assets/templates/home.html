@@ -16,12 +16,14 @@
     <section class="main-content flex center column space-evenly">
             <p class="flex center">The Basic Audio Sharing Service, here you can find music with free or open lincences with some info and their original link. Feel free to add an album, a radio transmission, podcast, audio book and so on.</p>
             <p class="flex center column">
-                <a href="/albums" class="button internal">Show all albums!</a>
                 <form action="/search" method="POST">
                     <input type="text" name="search" id="search" placeholder="Search for album or artist name">
                     <input class="button" type="submit" name="search_submit" value="Go!">
                 </form>
-                <a class="button" href="/add-album">Create album</a>
+                <span class="flex center">
+                    <a href="/albums" class="button internal">Show all albums!</a>
+                    <a class="button" href="/add-album">Create album</a>
+                </span>
             </p>
             <p class="flex center small">DESCLAIMER: anyone is free to create a new collection entry with external links, the cover images will be downloaded and the website has no warranty, is served AS IT IS, we do not control for any violation and are responsabile for none of those eventual ones.</p>
     </section>
