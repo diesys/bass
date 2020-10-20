@@ -8,9 +8,6 @@ from requests import get
 
 ######## FLASK SERVER APP ##############
 app = Flask(__name__, static_url_path="/assets", static_folder='assets')
-# if __name__ == '__main__':
-    # app.run(host='192.168.1.9', port=5000) #scoglitti
-    # app.run(host='192.168.1.137', port=5000) #comiso
 
 template_dir = 'assets/templates'
 albums_dir = 'albums'
@@ -20,9 +17,7 @@ env = Environment(
     loader=FileSystemLoader(template_dir),
     autoescape=select_autoescape(['html', 'xml'])
 )
-#####################################################################################
 
-# def getAlbum(album_author, album_name, verbose=False):
 def getAlbum(album_hash, verbose=False):
     """Album parser"""
     album_path = ''
@@ -54,7 +49,7 @@ def getAlbum(album_hash, verbose=False):
         return album
     return False
 
-## DA FARE MOOOOLTO MEGLIO
+## DA FARE MOOOOLTO MEGLIO ((((((((((((((((((((((((((()))))))))))))))))))))))))))
 def getList(author_name="all", verbose=False):
     """Builds album list for the given author"""
     list = {'INFO': {}, 'ITEMS': []}
@@ -92,16 +87,16 @@ def getList(author_name="all", verbose=False):
         print(f"Selected list: {list}")
     return list
 
-def getListAll(verbose=False):
+def getListAll(tracklist=os.listdir(albums_dir), verbose=False):
     """Builds all album list"""
-    list = {'INFO': {}, 'ITEMS': []}
-    for filename in os.listdir(albums_dir):
+    new_list = {'INFO': {}, 'ITEMS': []}
+    for filename in tracklist:
         if filename.endswith('.json'):
             f = open(f"{albums_dir}/{filename}", encoding="utf-8")
             album = json.load(f)
             try:
                 if(album['IN_HOMEPAGE'] != "False"):
-                    list['ITEMS'].append({
+                    new_list['ITEMS'].append({
                         'TITLE': album['TITLE'],
                         'COVER': album['COVER'],
                         # sarebbe meglio usare qui url_for nel template? con l'id?
@@ -110,10 +105,10 @@ def getListAll(verbose=False):
             except KeyError:
                 pass
 
-    list['INFO']['BACKGROUND'] = '/assets/img/todaybg.jpg'
+    new_list['INFO']['BACKGROUND'] = '/assets/img/todaybg.jpg'
     if(verbose):
-        print(f"All albums: {list}")
-    return list
+        print(f"All albums: {new_list}")
+    return new_list
 
 def todayTheme(verbose=False):
     response = get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=it-IT")
@@ -156,6 +151,13 @@ def newID(length=std_id_len):
         else:
             return rand_str
 
+def searchAudio(string):
+    result = []
+    for entry in os.listdir(albums_dir):
+        if string in entry:
+            result.append(entry)
+    return result
+
 ## Today bing image and color
 today_theme = todayTheme()    
 
@@ -164,6 +166,13 @@ today_theme = todayTheme()
 def home():
     """Homepage"""
     return env.get_template('home.html').render(TITLE="Welcome on BASS", COLOR=today_theme['COLOR'], BLOCK='home')
+
+@app.route("/search", methods=['POST'])
+def search():
+    """Search page"""
+    result = searchAudio(request.form['search'])
+    result_list = getListAll(result)
+    return env.get_template('list.html').render(TITLE=f"'{request.form['search']}' search result", COLOR=today_theme['COLOR'], AUTHOR="", LIST=result_list, BLOCK='list')
 
 @app.route("/add-album")
 def addAlbum():
