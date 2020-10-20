@@ -176,8 +176,6 @@ def addTracks():
     album = request.form
     return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", ALBUM=album, LENGHT=int(album['LENGHT']), COLOR=today_theme['COLOR'], BLOCK='add_tracks')
 
-    # return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", COLOR=today_theme['COLOR'], BLOCK='add_tracks')
-
 @app.route("/a/<id>/")
 def showAlbum(id):
     """Album by ID page"""
