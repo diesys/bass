@@ -165,10 +165,16 @@ def home():
     """Homepage"""
     return env.get_template('home.html').render(TITLE="Welcome on BASS", COLOR=today_theme['COLOR'], BLOCK='home')
 
-@app.route("/add")
-def newAlbum():
+@app.route("/add-album")
+def addAlbum():
     """Create new album"""
-    return env.get_template('new_album.html').render(TITLE="New album", COLOR=today_theme['COLOR'], BLOCK='new_album', NEW_HASH=newID())
+    return env.get_template('add_album.html').render(TITLE="Add album", COLOR=today_theme['COLOR'], BLOCK='add_album', NEW_HASH=newID())
+
+@app.route("/add-tracks")
+def addTracks():
+    """Add tracks to the new album"""
+    album = request.form
+    return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", COLOR=today_theme['COLOR'], BLOCK='add_tracks')
 
 @app.route("/a/<id>/")
 def showAlbum(id):

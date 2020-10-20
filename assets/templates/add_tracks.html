@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block new_album %}
+<!-- <body class="flex {#% if THEME != 'light' %}dark{% else %}light{% endif %#}"> -->
+<body class="flex dark">{% if COLOR %}
+    <!-- updates the css var theme color -->
+    <script>document.documentElement.style.setProperty('--theme-color', '{{ COLOR }}');</script>{% endif %}
+    <a href="/" id="bass_logo" class="bass_logo internal"></a>
+
+    <header class="flex column center justify-center" style="background-image: url('assets/img/todaybg.jpg');">
+        <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
+        <h1>Add new album to BASS Collection</h1>
+    </header>
+        
+    <section class="main-content flex center column">
+        <p>Fill the form below with attention, you WON'T be able to edit once submitted.</p>
+        <form action="/add-tracks" method="POST" id="post_new">
+            <fieldset class="flex center space-evenly">
+                <!-- <span class="flex center"> -->
+                    <!-- <label for="ID">ID</label> -->
+                    <input type="text" name="ID" id="ID" value="{{ NEW_HASH }}" hidden required>
+                <!-- </span> -->
+                <span class="flex center"><label for="AUTHOR">Author</label>
+                    <input type="text" name="AUTHOR" id="AUTHOR" placeholder="Add author" required>
+                </span>
+                <span class="flex center"><label for="TITLE">Album title</label>
+                    <input type="text" name="TITLE" id="TITLE" placeholder="Add title" required>
+                </span>
+                <span class="flex center"><label for="YEAR">Year</label>
+                    <input type="number" name="YEAR" id="YEAR" value="2021" min="1200" max="2050" required>
+                </span>
+                <span class="flex center"><label for="COVER">Album cover</label>
+                    <input type="text" name="COVER" id="COVER" placeholder="Add cover URL" required>
+                </span>
+                <span class="flex center"><label for="BACKGROUND">Page background</label>
+                    <input type="text" name="BACKGROUND" id="BACKGROUND" placeholder="Add background URL" required>
+                </span>
+            </fieldset>
+            
+            <fieldset class="flex center space-evenly">
+                <span class="flex center column"><label for="DESCRIPTION">Album description</label>
+                    <textarea name="DESCRIPTION" id="DESCRIPTION" cols="40" rows="12" placeholder="Standard HTML or simple text" required></textarea>
+                </span>
+                <span class="flex center column"><label for="CREDITS">Album credits</label>
+                    <textarea name="CREDITS" id="CREDITS" cols="40" rows="12" placeholder="Standard HTML or simple text" required></textarea>
+                </span>
+            </fieldset>
+
+            <fieldset class="flex center space-evenly">
+                <span class="flex center small"><label for="FIRST_TRACK">First track</label>
+                    <select class="small" name="FIRST_TRACK" id="FIRST_TRACK" required>
+                        <option value="0">0</option>
+                        <option value="1" selected>1</option>
+                    </select>
+                </span>
+                <span class="flex center small"><label for="IN_HOMEPAGE">In public home list?</label>
+                    <select class="small" name="IN_HOMEPAGE" id="IN_HOMEPAGE" required>
+                        <option value="True" selected>True</option>
+                        <option value="False">False</option>
+                    </select>
+                </span>
+            </fieldset>
+        </form>
+        
+        <div class="disclaimer txt-center">
+            <h3><u>WARNING</u></h3>
+            <p>You CANNOT edit this album later and the cover image will be downloaded.</p>
+            <p>The BASS website has no responsability for any copyright violation.</p>
+            <input class="button" formmethod="POST" form="post_new" type="submit" name="submit" value="Create *">
+            <p class="small">* By clicking the submit button you agree with the terms just above.</p>
+        </div>
+    </section>
+</body>
+{% endblock %}
