@@ -15,6 +15,7 @@ app = Flask(__name__, static_url_path="/assets", static_folder='assets')
 template_dir = 'assets/templates'
 albums_dir = 'albums'
 covers_dir = 'covers'
+std_id_len = 9
 env = Environment(
     loader=FileSystemLoader(template_dir),
     autoescape=select_autoescape(['html', 'xml'])
@@ -145,9 +146,15 @@ def renderErrPage(error):
     """Error pages template renderer"""
     return env.get_template('error.html').render(ERROR=error,TITLE=error, COLOR=today_theme['COLOR'], BLOCK='error')
 
-def get_random_string(length):
+def newID(length=std_id_len):
     letters = string.ascii_letters + string.digits
-    return ''.join(random.choice(letters) for i in range(length))
+    rand_str = ''.join(random.choice(letters) for i in range(length))
+
+    for entry in os.listdir(albums_dir):
+        if f"_{rand_str}.json" in entry:
+            newID()
+        else:
+            return rand_str
 
 ## Today bing image and color
 today_theme = todayTheme()    
@@ -161,7 +168,7 @@ def home():
 @app.route("/add")
 def newAlbum():
     """Create new album"""
-    return env.get_template('new_album.html').render(TITLE="New album", COLOR=today_theme['COLOR'], BLOCK='new_album', NEW_HASH=get_random_string(9))
+    return env.get_template('new_album.html').render(TITLE="New album", COLOR=today_theme['COLOR'], BLOCK='new_album', NEW_HASH=newID())
 
 @app.route("/a/<id>/")
 def showAlbum(id):
