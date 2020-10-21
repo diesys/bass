@@ -132,11 +132,11 @@ a {
     margin: 1em;
 }
 .light .button {
-    background-color:var(--dark-color-semialpha);
+    background-color:var(--dark-color-bitalpha);
     color:var(--light-color-bitalpha) !important;
 }
 .dark .button {
-    background-color:var(--light-color-semialpha);
+    background-color:var(--light-color-bitalpha);
     color:var(--dark-color-bitalpha) !important;
 }
 

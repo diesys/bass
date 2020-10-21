@@ -12,9 +12,10 @@
 <section class="main-content flex center column space-evenly">
         <p class="flex center">Here you can find music shared by users. Feel free to add an album, a radio transmission, podcast, audio book and so on.</p>
         <p class="flex center column">
-            <form action="/search" class="internal" method="POST">
-                <input type="text" name="search" id="search" placeholder="Search for album or artist name">
-                <input class="button" type="submit" name="search_submit" value="Go!">
+            <form action="/search" class="internal" method="GET">
+                <input type="text" name="s" id="search" placeholder="Search for album or artist name">
+                <input class="button" type="submit" value="Go!">
+                <input class="internal" name="t" value="dark" hidden>
             </form>
             <span class="flex center">
                 <a href="/albums" class="button internal">Show all albums!</a>

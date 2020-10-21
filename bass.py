@@ -153,11 +153,14 @@ def allAlbums():
     else:
         return renderErrPage("Something happened while loading albums")
 
-@app.route("/search", methods=['POST'])
+# @app.route("/search", methods=['POST'])
+@app.route("/search", methods=['GET'])
 def search():
     """Search page"""
-    result_list = getList(searchAudio(request.form['search']))
-    title = f"'{request.form['search']}' search result"
+    # result_list = getList(searchAudio(request.form['search']))
+    query = request.args.get('s')
+    result_list = getList(searchAudio(query))
+    title = f"'{query}' search result"
     return env.get_template('list.html').render(TITLE=title, COLOR=today_theme['COLOR'], AUTHOR=title, LIST=result_list, BLOCK='list')
 
 @app.route("/add-album")
