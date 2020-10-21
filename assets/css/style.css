@@ -248,11 +248,13 @@ header.on-stage::after {
     background: var(--light-color-bitalpha);
     box-shadow: 0 3px 50px -5px #0009;
 }
-.title {
+#tracklist .title {
     user-select: none;
+}
+.album-element .title {
+    border-radius: 0 0 1em 1em;
     padding: .1em .5em .5em;
     font-size: .8em;
-    border-radius: 0 0 1em 1em;
     position: relative;
     top: .5em;
 }
@@ -372,7 +374,7 @@ header .year-label {
 .main-content>#tracklist,
 .main-content>#details {
     flex: 1;
-    min-width: 350px;
+    min-width: 300px;
     z-index: 1;
 }
 .main-content>#details {
