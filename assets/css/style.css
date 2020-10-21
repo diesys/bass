@@ -222,6 +222,7 @@ header.on-stage::after {
     animation: var(--fade-scale-in);
     text-align: center;
     text-decoration: none;
+    z-index: 2;
 }
 .main-content.rotateX .album-element {animation: var(--rotateX-in);}
 .main-content.alternate .album-element:nth-child(odd) .album-cover {transform: rotateX(calc(-.5 *var(--rotateX-deg)));}
@@ -236,17 +237,16 @@ header.on-stage::after {
     width: 200px;
     height: 200px;
     border-radius: 1em;
-    padding: .7em;
+    padding: .6em;
     margin-bottom: 1em;
     display: block;
+    box-shadow: 0 3px 50px 5px var(--dark-box-shadow) !important;
 }
-.dark header .album-cover {
+.dark .album-cover {
     background: var(--dark-color-bitalpha);
-    box-shadow: 0 3px 50px 5px #000d;
 }
-.light header .album-cover {
+.light .album-cover {
     background: var(--light-color-bitalpha);
-    box-shadow: 0 3px 50px -5px #0009;
 }
 #tracklist .title {
     user-select: none;
@@ -257,6 +257,7 @@ header.on-stage::after {
     font-size: .8em;
     position: relative;
     top: .5em;
+    z-index: 0;
 }
 .dark .title {background: var(--dark-color-semialpha);}
 .light .title {background: var(--light-color-semialpha);}
@@ -265,15 +266,23 @@ header.on-stage::after {
     display: block;
     position: relative;
     top: 0;
-    border-radius: .4em;
+    border-radius: .8em;
     width: 100%;
     height: 100%;
     background: no-repeat var(--cover-img);
     background-size: cover;
     transition: box-shadow var(--duration);
+    box-sizing: border-box;
+    overflow: hidden;
 }
-.light .album-cover > .img {box-shadow: 0 1px 1em 2px var(--light-color);}
-.dark .album-cover > .img {box-shadow: 0 1px 1em 2px var(--dark-color);}
+.light .album-cover > .img {
+    box-shadow: 0 1px 1em 2px var(--dark-color-semialpha);
+    border: 2px solid var(--dark-color-semialpha);
+}
+.dark .album-cover > .img {
+    box-shadow: 0 1px 1em 2px var(--dark-color);
+    border: 2px solid var(--light-color-semialpha);
+}
 header h1 {
     margin: 0;
     padding: 3em 0 1.5em 0;

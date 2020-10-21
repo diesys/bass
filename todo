@@ -21,6 +21,8 @@ TODO:
 
 BASS = Basic Audio Sharing Service
 
+BUG: AL MOMENTO CERCA ANCHE NELL'HASH !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 - abilita disabilita funzione in homepage (possibilita di sfogliare o creare separate, NON SOLO NEL il template anche conf nel main)
 
 - chiedere a nu di fare db?
