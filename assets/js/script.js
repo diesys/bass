@@ -43,6 +43,10 @@ function updateThemeHrefs(theme='dark') {
         document.querySelectorAll('a.internal').forEach(element => {
             element.href = element.href.split('?')[0] + "?" + theme
         })
+        document.querySelectorAll('form.internal').forEach(element => {
+            action = element.setAttribute('action')
+            element.setAttribute('action', action+action.split('?')[0] + "?" + theme)
+        })
     }
 }
 
