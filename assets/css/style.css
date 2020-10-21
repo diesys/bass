@@ -120,7 +120,6 @@ a {
     filter: brightness(1.5);
 }
 .button {
-    background: var(--theme-color);
     border-radius: .5em;
     padding: .5em;
     text-shadow: none !important;
@@ -132,8 +131,14 @@ a {
     box-shadow: var(--light-box-shadow);
     margin: 1em;
 }
-.light .button {color: #fffa;}
-.dark .button {color: #000a;}
+.light .button {
+    background-color:var(--dark-color-semialpha);
+    color:var(--light-color-bitalpha) !important;
+}
+.dark .button {
+    background-color:var(--light-color-semialpha);
+    color:var(--dark-color-bitalpha) !important;
+}
 
 .big {
     font-size: 2em; 

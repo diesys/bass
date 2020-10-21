@@ -13,13 +13,17 @@
     <script src="/assets/js/script.min.js" defer="defer"></script>
 </head>
 <body class="flex dark">
-{% block toolbar %}{% endblock %}
+    <!-- toolbar -->
+    <div id="toolbar" class="flex center">
+        <a href="/" id="bass_logo" class="bass_logo internal"></a>
+        <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
+    </div>
 
-{% if BLOCK == 'home' %}            {% block home %}{% endblock %}
-{% elif BLOCK == 'list' %}	        {% block list %}{% endblock %}
-{% elif BLOCK == 'album' %}         {% block album %}{% endblock %}
-{% elif BLOCK == 'error' %}         {% block error %}{% endblock %}
-{% elif BLOCK == 'add_album' %}     {% block add_album %}{% endblock %}
+{% if BLOCK == 'home' %}    {% block home %}{% endblock %}
+{% elif BLOCK == 'list' %}    {% block list %}{% endblock %}
+{% elif BLOCK == 'album' %}    {% block album %}{% endblock %}
+{% elif BLOCK == 'error' %}    {% block error %}{% endblock %}
+{% elif BLOCK == 'add_album' %}    {% block add_album %}{% endblock %}
 {% elif BLOCK == 'add_tracks' %}    {% block add_tracks %}{% endblock %}
 {% endif %}
 <!-- loading block? -->

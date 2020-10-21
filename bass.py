@@ -130,24 +130,6 @@ def home():
     """Homepage"""
     return env.get_template('home.html').render(TITLE="Welcome on BASS", COLOR=today_theme['COLOR'], BLOCK='home')
 
-@app.route("/search", methods=['POST'])
-def search():
-    """Search page"""
-    result_list = getList(searchAudio(request.form['search']))
-    title = f"'{request.form['search']}' search result"
-    return env.get_template('list.html').render(TITLE=title, COLOR=today_theme['COLOR'], AUTHOR=title, LIST=result_list, BLOCK='list')
-
-@app.route("/add-album")
-def addAlbum():
-    """Create new album"""
-    return env.get_template('add_album.html').render(TITLE="Add album", COLOR=today_theme['COLOR'], BLOCK='add_album', NEW_HASH=newID())
-
-@app.route("/add-tracks", methods=["POST", "GET"])
-def addTracks():
-    """Add tracks to the new album"""
-    album = request.form
-    return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", ALBUM=album, LENGHT=int(album['LENGHT']), COLOR=today_theme['COLOR'], BLOCK='add_tracks')
-
 @app.route("/a/<id>/")
 def showAlbum(id):
     """Album by ID page"""
@@ -170,3 +152,21 @@ def allAlbums():
         return env.get_template('list.html').render(TITLE="All albums", COLOR=today_theme['COLOR'], AUTHOR="All albums", LIST=all_albums, BLOCK='list')
     else:
         return renderErrPage("Something happened while loading albums")
+
+@app.route("/search", methods=['POST'])
+def search():
+    """Search page"""
+    result_list = getList(searchAudio(request.form['search']))
+    title = f"'{request.form['search']}' search result"
+    return env.get_template('list.html').render(TITLE=title, COLOR=today_theme['COLOR'], AUTHOR=title, LIST=result_list, BLOCK='list')
+
+@app.route("/add-album")
+def addAlbum():
+    """Create new album"""
+    return env.get_template('add_album.html').render(TITLE="Add album", COLOR=today_theme['COLOR'], BLOCK='add_album', NEW_HASH=newID())
+
+@app.route("/add-tracks", methods=["POST", "GET"])
+def addTracks():
+    """Add tracks to the new album"""
+    album = request.form
+    return env.get_template('add_tracks.html').render(TITLE=f"Add tracks to {album['TITLE']}", ALBUM=album, LENGHT=int(album['LENGHT']), COLOR=today_theme['COLOR'], BLOCK='add_tracks')

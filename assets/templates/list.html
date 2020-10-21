@@ -10,7 +10,7 @@
 </header>    
 <!-- tracklist and infos / 'alternate' class gives alternate odd/even perspective for album covers -->
 <section class="main-content flex center space-evenly rotateX">{% for ENTRY in LIST.ITEMS %}
-    <a class="flex column center album-element" href="/{{ ENTRY.URL | safe }}">
+    <a class="flex column center album-element internal" href="/{{ ENTRY.URL | safe }}">
         <span class="btn-glass album-cover internal">
             <span class="img" style="background-image: url('{{ ENTRY.COVER | safe }}');"></span>
             <span class="title">{{ ENTRY.TITLE | safe }}</span>
