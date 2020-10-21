@@ -1,31 +1,26 @@
 {% extends "base.html" %}
 
 {% block home %}
-<!-- <body class="flex {#% if THEME != 'light' %}dark{% else %}light{% endif %#}"> -->
-<body class="flex dark">{% if COLOR %}
-    <!-- updates the css var theme color -->
-    <script>document.documentElement.style.setProperty('--theme-color', '{{ COLOR }}');</script>{% endif %}
+{% if COLOR %}<!-- updates the css var theme color -->
+<script>document.documentElement.style.setProperty('--theme-color', '{{ COLOR }}');</script>{% endif %}
 
-    <header class="flex column center justify-center" style="background-image: url('assets/img/todaybg.jpg');">
-        <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
-        <a href="#" class="internal bass_logo" id="bass_logo"></a>
-        <h1>Welcome to BASS</h1>
-        <p>The Basic Audio Sharing Service</p>
-    </header>
-        
-    <section class="main-content flex center column space-evenly">
-            <p class="flex center">Here you can find music shared by users. Feel free to add an album, a radio transmission, podcast, audio book and so on.</p>
-            <p class="flex center column">
-                <form action="/search" method="POST">
-                    <input type="text" name="search" id="search" placeholder="Search for album or artist name">
-                    <input class="button" type="submit" name="search_submit" value="Go!">
-                </form>
-                <span class="flex center">
-                    <a href="/albums" class="button internal">Show all albums!</a>
-                    <a class="button" href="/add-album">Create album</a>
-                </span>
-            </p>
-            <p class="flex center small">DESCLAIMER: anyone is free to create a new collection entry with external links (but the audio must have compatible - open/free - licence). The cover images will be downloaded and the website has no warranty, is served AS IT IS. We do not control for any copyright and we are not responsabile for any eventual violation. We do not collect data about users.</p>
-    </section>
-</body>
+<header class="flex column center justify-center" style="background-image: url('assets/img/todaybg.jpg');">
+    <h1>Welcome to BASS</h1>
+    <p>The Basic Audio Sharing Service</p>
+</header>
+    
+<section class="main-content flex center column space-evenly">
+        <p class="flex center">Here you can find music shared by users. Feel free to add an album, a radio transmission, podcast, audio book and so on.</p>
+        <p class="flex center column">
+            <form action="/search" method="POST">
+                <input type="text" name="search" id="search" placeholder="Search for album or artist name">
+                <input class="button" type="submit" name="search_submit" value="Go!">
+            </form>
+            <span class="flex center">
+                <a href="/albums" class="button internal">Show all albums!</a>
+                <a class="button" href="/add-album">Create album</a>
+            </span>
+        </p>
+        <p class="flex center small">DESCLAIMER: anyone is free to create a new collection entry with external links (but the audio must have compatible - open/free - licence). The cover images will be downloaded and the website has no warranty, is served AS IT IS. We do not control for any copyright and we are not responsabile for any eventual violation. We do not collect data about users.</p>
+</section>
 {% endblock %}

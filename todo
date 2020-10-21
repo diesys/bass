@@ -12,6 +12,9 @@ res:
 - https://www.techiediaries.com/flask-electron-tutorial/
 - https://github.com/joetats/youtube_search (mettere select nella ricerca se youtube o local)
 
+- https://python-poetry.org/docs/
+- https://github.com/bretello/bass
+
 pip freeze / per dipendenze (dentro virtualenv)
 
 TODO:

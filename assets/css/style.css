@@ -199,6 +199,12 @@ header.on-stage::after {
 }
 .dark header.tilt-gradient::after {filter: brightness(.9) hue-rotate(8deg);}
 .light header.tilt-gradient::after {filter: brightness(1.08) hue-rotate(-8deg);}
+
+.main-content:not(.tracklist) > * {
+    top: calc(-.8 * var(--linear-gradient-height));
+    position: relative;
+}
+
 /* list albums */
 .album-element {
     transition: transform var(--duration); 
@@ -209,6 +215,8 @@ header.on-stage::after {
     transform-style: preserve-3d;
     margin: 1em;
     animation: var(--fade-scale-in);
+    text-align: center;
+    text-decoration: none;
 }
 .main-content.rotateX .album-element {animation: var(--rotateX-in);}
 .main-content.alternate .album-element:nth-child(odd) .album-cover {transform: rotateX(calc(-.5 *var(--rotateX-deg)));}
@@ -235,7 +243,16 @@ header.on-stage::after {
     background: var(--light-color-bitalpha);
     box-shadow: 0 3px 50px -5px #0009;
 }
-.album-cover + .title {user-select: none;}
+.title {
+    user-select: none;
+    padding: .1em .5em .5em;
+    font-size: .8em;
+    border-radius: 0 0 1em 1em;
+    position: relative;
+    top: .5em;
+}
+.dark .title {background: var(--dark-color-semialpha);}
+.light .title {background: var(--light-color-semialpha);}
 .album-cover > .img {
     /* content: ''; */
     display: block;
@@ -270,22 +287,30 @@ header.on-stage a.author {
     max-width: var(--stage-gradient-width);
     padding: 1em;
 }
-#bass_logo,
-#theme_toggle {
+#toolbar {
+    z-index: 10;
     position: fixed;
-    top: .6em;
-    margin: 1em;
-    background-repeat: no-repeat;
-    background-size: contain;
-    z-index: 4;
+    width: 100%;
+    padding: 1em;
+    justify-content: space-between;
+    /* padding: 0 3em; */
 }
 #bass_logo {
-    left: .4em;
+    min-height: 3.2em;
+    width: 20%;
+    min-width: 5em;
+    max-width: 8em;
+}
+#bass_logo,
+#theme_toggle {
+    /* position: fixed; */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    z-index: 4;
 }
 .bass_logo {
     background-image: url('../img/logo_bass.png');
-    width: 6em;
-    min-height: 4em;
     filter: invert(1);
     opacity: .7;
     transition: opacity .4s;
@@ -299,7 +324,6 @@ header.on-stage a.author {
     background-image: url('sunmoon.png');
     width: 3.2em;
     height: 3.2em;
-    right: .4em;
     border-radius: var(--space);
     filter: invert(0);
     background-color: var(--dark-btn);

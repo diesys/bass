@@ -1,31 +1,20 @@
 {% extends "base.html" %}
 
 {% block list %}
-<!-- <body class="flex {#% if THEME != 'light' %}dark{% else %}light{% endif %#}"> -->
-<body class="flex dark">
-{% if LIST.INFO.COLOR %}
     <!-- updates the css var theme color -->
-    <script>document.documentElement.style.setProperty('--theme-color', "{{ LIST.INFO.COLOR }}")</script>
-{% elif COLOR %}
-    <script>document.documentElement.style.setProperty('--theme-color', "{{ COLOR }}")</script>
+{% if LIST.INFO.COLOR %}    <script>document.documentElement.style.setProperty('--theme-color', "{{ LIST.INFO.COLOR }}")</script>
+{% elif COLOR %}    <script>document.documentElement.style.setProperty('--theme-color', "{{ COLOR }}")</script>
 {% endif %}
-    
-    <!-- album title, author and images -->
-    <header class="flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND | safe }}');">
-        <span id="theme_toggle" onclick="toggleTheme();" class="btn-glass"></span>
-        <a href="/" id="bass_logo" class="bass_logo internal"></a>
-        <h1>{{ AUTHOR | safe }}</h1>
-    </header>
-    
-    <!-- tracklist and infos / 'alternate' class gives alternate odd/even perspective for album covers -->
-    <section class="main-content flex center space-evenly rotateX">
-        {% for ENTRY in LIST.ITEMS %}
-            <span class="flex column center album-element">
-                <a class="btn-glass album-cover internal" href="/{{ ENTRY.URL | safe }}"><span class="img" style="background-image: url('{{ ENTRY.COVER | safe }}');"></span></a>
-                <span class="title">{{ ENTRY.TITLE | safe }}</span>
-            </span>
-        {% endfor %}
-    </section>
-</body>
-
+<header class="flex column center justify-center" style="background-image: url('{{ LIST.INFO.BACKGROUND | safe }}');">
+    <h1>{{ AUTHOR | safe }}</h1>
+</header>    
+<!-- tracklist and infos / 'alternate' class gives alternate odd/even perspective for album covers -->
+<section class="main-content flex center space-evenly rotateX">{% for ENTRY in LIST.ITEMS %}
+    <a class="flex column center album-element" href="/{{ ENTRY.URL | safe }}">
+        <span class="btn-glass album-cover internal">
+            <span class="img" style="background-image: url('{{ ENTRY.COVER | safe }}');"></span>
+            <span class="title">{{ ENTRY.TITLE | safe }}</span>
+        </span>
+    </a>{% endfor %}
+</section>
 {% endblock %}
