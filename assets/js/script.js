@@ -6,6 +6,7 @@ function playTrack(entry) {
 
     var player = document.querySelector('#player>audio');
     var playing = document.querySelector('#player>#now_playing');
+    document.querySelector('#player').classList.add('active');
 
     player.setAttribute('src', entry.getAttribute('data-audiosrc'));
     player.play();

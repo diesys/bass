@@ -468,14 +468,18 @@ fieldset {
 /* PLAYER */
 #player {
     position: fixed;
-    bottom: 0;
     width: 100vw;
     min-height: 3em;
     padding: .5rem 1em;
     margin: 0;
+    bottom: 0;
+    transform: translateY(100%);
     flex-wrap: wrap-reverse !important;
     transition: var(--trans-a) !important;
     z-index: 3;
+}
+#player.active {
+    transform: translateY(0%) !important;
 }
 .dark #player {
     background: linear-gradient(transparent, var(--dark-color-bitalpha) 70%);
